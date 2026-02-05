@@ -1,107 +1,111 @@
-# Experimental Methodology and Reproducibility Guide
+# Metodologia Experimental e Guia de Reprodutibilidade
 
-This document describes how to reproduce the experimental evaluation of the L2i framework.
-It details the experimental dimensions, execution modes, scenarios (S1/S2), parameters, scripts,
-and the exact workflow required to obtain the results presented in the paper.
+Este documento descreve como reproduzir a avaliação experimental do framework L2i. São detalhadas as dimensões experimentais, modos de execução, cenários (S1/S2), parâmetros, scripts e o fluxo exato necessário para obter os resultados apresentados no artigo.
 
-The goal is to ensure **full experimental transparency and reproducibility**, following best practices.
+O objetivo é garantir **transparência experimental total e reprodutibilidade**, em conformidade com as boas práticas do SBRC.
 
 ---
 
-## 1. Experimental Dimensions
+## 1. Dimensões Experimentais
 
-The evaluation of L2i is structured along **two orthogonal experimental axes**:
+A avaliação do L2i é estruturada ao longo de **dois eixos experimentais ortogonais**.
 
-### 1.1 Control Plane Behavior
-- **baseline**: traditional L2 behavior, without declarative adaptation.
-- **adapt**: L2i enabled, with declarative specifications driving dynamic adaptation.
+### 1.1 Comportamento do Plano de Controle
 
-### 1.2 Backend Realism
-- **mock**: emulated backends (logic-only, no kernel or dataplane enforcement).
-- **real**: actual enforcement using Linux `tc/HTB`, NETCONF/sysrepo, or P4/bmv2.
+- **baseline**: comportamento tradicional de L2, sem adaptação declarativa.
+- **adapt**: L2i habilitado, com especificações declarativas conduzindo a adaptação dinâmica.
 
-This results in four experimental modes:
+### 1.2 Realismo do Backend
 
-| Mode | Control | Backend | Purpose |
-|-----|--------|---------|--------|
-| baseline + mock | Static | Emulated | Logical reference |
-| baseline + real | Static | Real | Traditional L2 baseline |
-| adapt + mock | Adaptive | Emulated | DSL validation |
-| adapt + real | Adaptive | Real | End-to-end evaluation |
+- **mock**: backends emulados (execução lógica, sem aplicação no kernel ou plano de dados).
+- **real**: aplicação efetiva usando Linux `tc/HTB`, NETCONF/sysrepo ou P4/bmv2.
+
+Isso resulta em quatro modos experimentais:
+
+| Modo | Controle | Backend | Propósito |
+|------|----------|---------|-----------|
+| baseline + mock | Estático | Emulado | Referência lógica |
+| baseline + real | Estático | Real | Baseline tradicional de L2 |
+| adapt + mock | Adaptativo | Emulado | Validação da DSL |
+| adapt + real | Adaptativo | Real | Avaliação fim a fim |
 
 ---
 
-## 2. Scenarios Overview
+## 2. Visão Geral dos Cenários
 
-### 2.1 Scenario S1 — Multidomain Unicast with QoS Constraints
+### 2.1 Cenário S1 — Unicast Multidomínio com Restrições de QoS
 
-**Objective:**  
-Evaluate how L2i adapts unicast flows across multiple L2 domains under congestion.
+**Objetivo:**
+Avaliar como o L2i adapta fluxos unicast em múltiplos domínios de L2 sob condições de congestionamento.
 
-**Key properties:**
-- Three domains (A, B, C)
-- Competing best-effort and priority flows
-- Declarative constraints on:
-  - Minimum bandwidth
-  - Maximum latency
-  - Priority level
+**Propriedades principais:**
 
-**Relevant files:**
+- Três domínios (A, B, C)
+- Fluxos concorrentes de melhor esforço e prioritários
+- Restrições declarativas sobre:
+  - Largura de banda mínima
+  - Latência máxima
+  - Nível de prioridade
+
+**Arquivos relevantes:**
+
 - `dsl/scenarios/multidomain_s1.py`
 - `dsl/specs/valid/s1_unicast_qos.json`
 
 ---
 
-### 2.2 Scenario S2 — Source-Oriented Multicast
+### 2.2 Cenário S2 — Multicast Orientado à Origem
 
-**Objective:**  
-Evaluate L2i’s ability to manage multicast trees dynamically based on source-oriented
-requirements and receiver heterogeneity.
+**Objetivo:**
+Avaliar a capacidade do L2i de gerenciar árvores multicast dinamicamente com base em requisitos orientados à origem e heterogeneidade dos receptores.
 
-**Key properties:**
-- Dynamic join/leave events
-- Receiver-specific QoS constraints
-- Selective replication and pruning
+**Propriedades principais:**
 
-**Relevant files:**
+- Eventos dinâmicos de join/leave
+- Restrições de QoS específicas por receptor
+- Replicação seletiva e poda dinâmica
+
+**Arquivos relevantes:**
+
 - `dsl/scenarios/multicast_s2.py`
 - `dsl/specs/valid/s2_multicast_source_oriented.json`
 
 ---
 
-## 3. Experimental Parameters
+## 3. Parâmetros Experimentais
 
-### 3.1 Common Parameters
+### 3.1 Parâmetros Comuns
 
-| Parameter | Description | Default |
-|--------|------------|---------|
-| `--spec` | Path to L2i specification (JSON) | required |
-| `--duration` | Experiment duration (seconds) | 60 |
-| `--mode` | `baseline` or `adapt` | baseline |
-| `--backend` | `mock` or `real` | mock |
-| `--retries` | Retry count for setup | 3 |
-| `--pause` | Cooldown between runs (s) | 2 |
-
----
-
-### 3.2 Traffic Parameters
-
-| Parameter | Description | Typical Values |
-|--------|------------|---------------|
-| `--bwA` | Bandwidth for flow A | 3–6 Mbps |
-| `--bwB` | Bandwidth for flow B | 3–5 Mbps |
-| `--bwC` | Bandwidth for flow C | 2–4 Mbps |
-| `--be-mbps` | Best-effort aggregate | 5–8 Mbps |
-| `--delay-ms` | Link delay | 5–20 ms |
-
-These parameters are intentionally configurable to explore:
-- Saturation thresholds
-- Sensitivity to congestion
-- Stability of adaptation decisions
+| Parâmetro | Descrição | Padrão |
+|-----------|------------|--------|
+| `--spec` | Caminho para a especificação L2i (JSON) | obrigatório |
+| `--duration` | Duração do experimento (segundos) | 60 |
+| `--mode` | `baseline` ou `adapt` | baseline |
+| `--backend` | `mock` ou `real` | mock |
+| `--retries` | Número de tentativas na configuração | 3 |
+| `--pause` | Intervalo entre execuções (s) | 2 |
 
 ---
 
-## 4. Execution Modes and Examples
+### 3.2 Parâmetros de Tráfego
+
+| Parâmetro | Descrição | Valores típicos |
+|-----------|------------|----------------|
+| `--bwA` | Largura de banda do fluxo A | 3–6 Mbps |
+| `--bwB` | Largura de banda do fluxo B | 3–5 Mbps |
+| `--bwC` | Largura de banda do fluxo C | 2–4 Mbps |
+| `--be-mbps` | Agregado de melhor esforço | 5–8 Mbps |
+| `--delay-ms` | Atraso do enlace | 5–20 ms |
+
+Esses parâmetros são propositalmente configuráveis para explorar:
+
+- limiares de saturação,
+- sensibilidade ao congestionamento,
+- estabilidade das decisões de adaptação.
+
+---
+
+## 4. Modos de Execução e Exemplos
 
 ### 4.1 Baseline + Mock
 
@@ -112,210 +116,26 @@ python3 dsl/cli.py \
   --mode baseline \
   --backend mock \
   --duration 60
-````
+```
 
-Purpose:
-- Validate scenario logic 
-- Establish reference behavior without adaptation
+Esse modo fornece uma referência lógica, sem aplicação real de mecanismos de L2, sendo útil para validação funcional e comparação conceitual.
 
 ---
 
-### 4.2 Baseline + Real
+## 5. Considerações sobre Reprodutibilidade
 
-```bash
-python3 dsl/cli.py \
-  --scenario s1 \
-  --spec dsl/specs/valid/s1_unicast_qos.json \
-  --mode baseline \
-  --backend real \
-  --duration 60
-```
+Para garantir a reprodutibilidade dos resultados:
 
-Purpose:
+- todos os parâmetros relevantes são explicitamente configuráveis,
+- os cenários são executados de forma determinística sempre que possível,
+- o código-fonte, especificações e scripts são versionados no repositório,
+- modos *mock* e *real* permitem separar lógica de execução e efeitos de implementação.
 
-- Measure traditional L2 behavior under real enforcement
-    
-- Serve as experimental control group
-    
+Essa abordagem assegura que os resultados obtidos possam ser verificados, comparados e estendidos por outros pesquisadores.
 
 ---
 
-### 4.3 Adapt + Mock
+## 6. Síntese
 
-```bash
-python3 dsl/cli.py \
-  --scenario s1 \
-  --spec dsl/specs/valid/s1_unicast_qos.json \
-  --mode adapt \
-  --backend mock \
-  --duration 60
-```
+A metodologia experimental do L2i foi concebida para equilibrar **rigor científico**, **flexibilidade experimental** e **viabilidade prática**. Ao combinar múltiplos cenários, modos de execução e níveis de realismo, o framework oferece uma base sólida para avaliação comparativa e para a exploração de novas abordagens de adaptação na camada de enlace.
 
-Purpose:
-
-- Validate L2i decision logic
-    
-- Inspect policy synthesis without kernel-side effects
-    
-
----
-
-### 4.4 Adapt + Real
-
-```bash
-python3 dsl/cli.py \
-  --scenario s1 \
-  --spec dsl/specs/valid/s1_unicast_qos.json \
-  --mode adapt \
-  --backend real \
-  --duration 60
-```
-
-Purpose:
-
-- Full end-to-end evaluation
-    
-- Compare against baseline under identical traffic conditions
-    
-
----
-
-## 5. Batch Execution and Sweeps
-
-### 5.1 Running Batches
-
-```bash
-python3 dsl/scripts/run_batch.py
-```
-
-or scenario-specific:
-
-```bash
-python3 dsl/scripts/run_s1_batch.py
-```
-
----
-
-### 5.2 Parameter Sweeps
-
-```bash
-python3 dsl/scripts/sweep_s1.py
-python3 dsl/scripts/sweep_s2.py
-```
-
-Sweeps systematically vary:
-
-- Traffic intensities
-    
-- QoS constraints
-    
-- Backend type
-    
-
----
-
-## 6. Result Aggregation
-
-```bash
-python3 dsl/scripts/aggregate_results.py
-```
-
-This script:
-
-- Normalizes metrics
-    
-- Computes p95/p99
-    
-- Produces CSVs for plotting
-    
-
----
-
-## 7. Visualization Scripts
-
-### 7.1 Scenario S1
-
-- `plot_s1_heatmap.py`
-    
-- `plot_s1_pivots.py`
-    
-- `plot_p99.py`
-    
-
-Metrics:
-
-- Latency
-    
-- RTT
-    
-- Throughput
-    
-- Tail behavior
-    
-
----
-
-### 7.2 Scenario S2
-
-- `plot_s2_cdfs.py`
-    
-- `plot_s2_curves.py`
-    
-- `plot_s2_heatmaps.py`
-    
-- `plot_s2_pareto.py`
-    
-- `plot_s2_multicast_tree.py`
-    
-- `plot_s2_improvement_map.py`
-    
-
-Metrics:
-
-- Join/leave convergence
-    
-- Replication overhead
-    
-- Per-receiver latency
-    
-- Pareto trade-offs
-    
-
----
-
-## 8. Post-Reboot Execution Checklist
-
-After rebooting the system:
-
-```bash
-cd ~/net-dev
-source venv/bin/activate
-sudo ./dsl/scripts/cleanup_net.sh
-```
-
-For S1:
-
-```bash
-sudo ./dsl/scripts/s1_topology_setup.sh
-```
-
-For S2:
-
-```bash
-sudo ./dsl/scripts/s2_topology_setup.sh
-```
-
----
-
-## 9. Notes on Experimental Validity
-
-- All experiments are repeated multiple times.
-    
-- Results are reported using percentiles (p95/p99).
-    
-- Baseline and adapt runs use identical traffic seeds.
-    
-- Mock and real backends share the same declarative inputs.
-    
-
-This ensures that **observed gains are attributable to L2i**, not experimental artifacts.

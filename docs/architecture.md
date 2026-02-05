@@ -1,121 +1,99 @@
-# Architecture — L2i Dynamic L2 Adaptation Framework
+# Arquitetura — Framework de Adaptação Dinâmica em L2 (L2i)
 
-## 1. Architectural Overview
+## 1. Visão Geral da Arquitetura
 
-The L2i framework implements a **declarative, intent-oriented adaptation layer for the link layer (L2)**, designed to operate across heterogeneous and multi-domain environments. Its primary goal is to decouple **communication requirements expressed by upper layers** from **technology-specific mechanisms** used to enforce them at L2.
+O framework L2i implementa uma **camada de adaptação declarativa e orientada a intenções para a camada de enlace (L2)**, projetada para operar em ambientes heterogêneos e multidomínio. Seu objetivo principal é desacoplar **os requisitos de comunicação expressos pelas camadas superiores** dos **mecanismos específicos de tecnologia** utilizados para aplicá-los em L2.
 
-At a high level, the architecture is organized around three orthogonal concerns:
+Em alto nível, a arquitetura é organizada em torno de três preocupações ortogonais:
 
-1. **Specification** — what the communication requires;
-    
-2. **Adaptation** — how those requirements are mapped to available capabilities;
-    
-3. **Execution** — how concrete configurations are applied in each domain.
-    
+1. **Especificação** — o que a comunicação requer;
+2. **Adaptação** — como esses requisitos são mapeados para as capacidades disponíveis;
+3. **Execução** — como configurações concretas são aplicadas em cada domínio.
 
-This separation enables:
+Essa separação permite:
 
-- portability across L2 technologies,
-    
-- incremental evolution of the data plane,
-    
-- and coexistence between legacy and programmable infrastructures.
-    
+- portabilidade entre tecnologias de L2,
+- evolução incremental do plano de dados,
+- coexistência entre infraestruturas legadas e programáveis.
 
-The architecture explicitly avoids exposing low-level configuration details (e.g., `tc` commands, NETCONF RPCs, or P4 tables) to applications or protocols.
+A arquitetura evita explicitamente expor detalhes de configuração de baixo nível (por exemplo, comandos `tc`, RPCs NETCONF ou tabelas P4) para aplicações ou protocolos.
 
 ---
 
-## 2. Layered Architecture
+## 2. Arquitetura em Camadas
 
-Conceptually, the framework is positioned **between L2 and L3**, acting as an adaptation stratum that extends traditional L2 functionality without modifying existing protocol stacks.
+Conceitualmente, o framework é posicionado **entre L2 e L3**, atuando como um estrato de adaptação que estende as funcionalidades tradicionais da camada de enlace sem modificar as pilhas de protocolos existentes.
 
 ```
 +-------------------------------+
-| Applications / Upper Protocols|
+| Aplicações / Protocolos Superiores |
 +-------------------------------+
                |
                v
 +-------------------------------------------+
-| Declarative Adaptation Layer (L2i)         |
+| Camada de Adaptação Declarativa (L2i)      |
 |                                           |
-|  - Intent specification                   |
-|  - Capability-aware mapping               |
-|  - Policy and conflict handling           |
+|  - Especificação de intenções              |
+|  - Mapeamento orientado a capacidades      |
+|  - Políticas e tratamento de conflitos     |
 +-------------------------------------------+
                |
                v
 +-------------------------------------------+
-| L2 Execution Domains                      |
+| Domínios de Execução em L2                 |
 |                                           |
-|  - Linux tc / HTB                         |
-|  - NETCONF / YANG-based devices           |
-|  - P4 / P4Runtime (bmv2)                  |
+|  - Linux tc / HTB                          |
+|  - Dispositivos NETCONF / YANG             |
+|  - P4 / P4Runtime (bmv2)                   |
 +-------------------------------------------+
 ```
 
-This position allows L2i to:
+Essa posição permite ao L2i:
 
-- enforce QoS, prioritization, and multicast behavior,
-    
-- react dynamically to changes in traffic or topology,
-    
-- and remain transparent to upper layers.
-    
+- impor QoS, priorização e comportamento multicast,
+- reagir dinamicamente a mudanças de tráfego ou topologia,
+- permanecer transparente às camadas superiores.
 
 ---
 
-## 3. Core Architectural Components
+## 3. Componentes Arquiteturais Principais
 
-The architecture is decomposed into three main components:
+A arquitetura é decomposta em três componentes centrais:
 
 1. **CED — Camada de Especificações Declarativas**
-    
 2. **MAD — Mecanismo de Adaptação Dinâmica**
-    
 3. **AC — Aplicador de Configurações**
-    
 
-L2i is the **concrete realization of the CED**, while MAD and AC provide the runtime adaptation and execution pipeline.
+O L2i é a **materialização concreta da CED**, enquanto MAD e AC fornecem o pipeline de adaptação e execução em tempo de execução.
 
 ---
 
 ## 4. Camada de Especificações Declarativas (CED)
 
-### 4.1 Role and Rationale
+### 4.1 Papel e Fundamentação
 
-The CED defines the **semantic interface** between upper layers and the link layer.  
-Its responsibility is to express _communication intent_, not configuration procedures.
+A CED define a **interface semântica** entre as camadas superiores e a camada de enlace. Sua responsabilidade é expressar a _intenção de comunicação_, e não procedimentos de configuração.
 
-Instead of specifying _how_ to configure L2 mechanisms, the CED allows entities to declare:
+Em vez de especificar _como_ configurar mecanismos de L2, a CED permite declarar:
 
-- bandwidth constraints (min / max),
-    
-- latency and jitter bounds,
-    
-- relative priorities,
-    
-- multicast semantics (including source-oriented trees),
-    
-- and scope of applicability.
-    
+- restrições de largura de banda (mín./máx.),
+- limites de latência e jitter,
+- prioridades relativas,
+- semânticas de multicast (incluindo árvores orientadas à origem),
+- escopo de aplicabilidade.
 
-### 4.2 L2i as the Materialization of the CED
+### 4.2 L2i como Materialização da CED
 
-L2i is the **domain-specific declarative language** that implements the CED.
+O L2i é a **linguagem declarativa específica de domínio** que implementa a CED.
 
-Key design properties of L2i:
+Principais propriedades de projeto do L2i:
 
-- **Technology-agnostic**: no references to VLAN IDs, queue numbers, or P4 tables.
-    
-- **Flow-oriented**: specifications are bound to communication intents, not protocols.
-    
-- **Schema-validated**: every specification is validated before execution.
-    
-- **Extensible**: new attributes can be added without changing execution backends.
-    
+- **Agnóstico à tecnologia**: não há referências a VLANs, filas ou tabelas P4.
+- **Orientado a fluxos**: especificações são vinculadas a intenções de comunicação, não a protocolos.
+- **Validado por esquema**: toda especificação é validada antes da execução.
+- **Extensível**: novos atributos podem ser adicionados sem alterar os backends de execução.
 
-In the repository, L2i is implemented primarily under:
+No repositório, o L2i é implementado principalmente em:
 
 ```
 dsl/l2i/
@@ -125,262 +103,201 @@ dsl/specs/
 
 ---
 
-## 5. L2i Internal Architecture
+## 5. Arquitetura Interna do L2i
 
-Internally, L2i is structured as a pipeline of semantic processing stages:
+Internamente, o L2i é estruturado como um pipeline de estágios de processamento semântico.
 
-### 5.1 Specification Parsing and Validation
+### 5.1 Análise e Validação de Especificações
 
-- JSON-based specifications are validated against:
-    
-    - `l2i-v0.json`
-        
-    - `l2i-capability-v0.json`
-        
-- Semantic constraints are enforced (e.g., `bw_min ≤ bw_max`).
-    
+- Especificações em JSON são validadas contra:
+  - `l2i-v0.json`
+  - `l2i-capability-v0.json`
+- Restrições semânticas são impostas (por exemplo, `bw_min ≤ bw_max`).
 
-Relevant modules:
+Módulos relevantes:
 
 - `validator.py`
-    
 - `schemas.py`
-    
 - `models.py`
-    
 
-Invalid specifications are rejected **before** any network action occurs.
+Especificações inválidas são rejeitadas **antes** de qualquer ação na rede.
 
 ---
 
-### 5.2 Capability Modeling
+### 5.2 Modelagem de Capacidades
 
-Each execution domain exposes a **capability profile** describing what it can enforce.
+Cada domínio de execução expõe um **perfil de capacidades** descrevendo o que ele é capaz de aplicar.
 
-Examples:
+Exemplos:
 
-- Linux domain: shaping, queuing, priorities.
-    
-- NETCONF domain: abstract QoS models.
-    
-- P4 domain: match-action pipelines, multicast groups.
-    
+- Domínio Linux: modelagem de tráfego, filas e prioridades.
+- Domínio NETCONF: modelos abstratos de QoS.
+- Domínio P4: pipelines match-action e grupos multicast.
 
-Capabilities are described via:
+As capacidades são descritas por meio de:
 
 - `profiles/*.json`
-    
 - `capabilities.py`
-    
 - `compatibility_map.py`
-    
 
-This allows L2i to reason about **what is feasible** in each domain.
+Isso permite ao L2i raciocinar sobre **o que é viável** em cada domínio.
 
 ---
 
-### 5.3 Intent Composition and Decomposition
+### 5.3 Composição e Decomposição de Intenções
 
-When a specification spans multiple domains, L2i:
+Quando uma especificação abrange múltiplos domínios, o L2i:
 
-1. decomposes the global intent,
-    
-2. maps sub-intents to compatible domains,
-    
-3. preserves semantic equivalence across heterogeneous mechanisms.
-    
+1. decompõe a intenção global,
+2. mapeia subintenções para domínios compatíveis,
+3. preserva equivalência semântica entre mecanismos heterogêneos.
 
-Relevant modules:
+Módulos relevantes:
 
 - `compose.py`
-    
 - `synth.py`
-    
 - `topo.py`
-    
 
-This step is essential for multi-domain scenarios (S1, S2).
+Essa etapa é essencial para cenários multidomínio (S1, S2).
 
 ---
 
 ## 6. Mecanismo de Adaptação Dinâmica (MAD)
 
-The MAD is responsible for **runtime decision-making**.
+O MAD é responsável pela **tomada de decisão em tempo de execução**.
 
-Its responsibilities include:
+Suas responsabilidades incluem:
 
-- translating validated intents into execution plans,
-    
-- selecting execution backends (mock or real),
-    
-- handling retries and transient failures,
-    
-- supporting closed-loop operation.
-    
+- traduzir intenções validadas em planos de execução,
+- selecionar backends de execução (mock ou real),
+- lidar com falhas transitórias e tentativas de reaplicação,
+- suportar operação em malha fechada.
 
-Key modules:
+Módulos-chave:
 
 - `closed_loop.py`
-    
 - `fed.py`
-    
 - `policies.py`
-    
 
-MAD can operate in:
+O MAD pode operar em:
 
-- **open-loop** mode (static application),
-    
-- **closed-loop** mode (feedback-driven reconfiguration).
-    
+- modo **open-loop** (aplicação estática),
+- modo **closed-loop** (reconfiguração orientada por feedback).
 
 ---
 
 ## 7. Aplicador de Configurações (AC)
 
-The AC is the **technology-facing execution layer**.
+O AC é a **camada de execução orientada à tecnologia**.
 
-It applies concrete actions using backend-specific adapters:
+Ele aplica ações concretas por meio de adaptadores específicos de backend.
 
-### 7.1 Backend Abstraction
+### 7.1 Abstração de Backends
 
-Backends are isolated under:
+Os backends são isolados em:
 
 ```
 dsl/l2i/backends/
 ```
 
-Typical backends include:
+Backends típicos incluem:
 
 - `tc_htb.py` (Linux tc/HTB),
-    
 - `netconf.py` (sysrepo/Netopeer2),
-    
 - `p4runtime.py` (bmv2 + P4Runtime),
-    
-- `mock.py` (instrumented execution without real enforcement).
-    
+- `mock.py` (execução instrumentada sem aplicação real).
 
-This abstraction ensures that **adding a new L2 technology does not affect the CED or MAD**.
+Essa abstração garante que **a adição de uma nova tecnologia de L2 não afete a CED ou o MAD**.
 
 ---
 
-### 7.2 Execution Semantics
+### 7.2 Semântica de Execução
 
-The AC ensures that:
+O AC garante que:
 
-- actions are idempotent,
-    
-- partial failures are detectable,
-    
-- state can be inspected or rolled back,
-    
-- and enforcement respects declared priorities.
-    
+- ações sejam idempotentes,
+- falhas parciais sejam detectáveis,
+- o estado possa ser inspecionado ou revertido,
+- a aplicação respeite as prioridades declaradas.
 
-Telemetry support is provided via:
+O suporte a telemetria é fornecido por:
 
 - `ac5_telemetry.py`
-    
 
 ---
 
-## 8. Multicast-Oriented Architecture
+## 8. Arquitetura Orientada a Multicast
 
-L2i includes native support for **source-oriented multicast at L2**.
+O L2i inclui suporte nativo a **multicast orientado à origem em L2**.
 
-Architectural highlights:
+Destaques arquiteturais:
 
-- multicast is treated as a _first-class intent_,
-    
-- join/leave dynamics are handled explicitly,
-    
-- replication is capability-aware and selective.
-    
+- multicast é tratado como uma intenção de primeira classe,
+- dinâmicas de join/leave são tratadas explicitamente,
+- replicação é seletiva e orientada a capacidades.
 
-Key modules:
+Módulos-chave:
 
 - `mcast.py`
-    
 - `emit.py`
-    
 
-This enables experimentation beyond traditional IGMP snooping, including:
+Isso viabiliza experimentação além do IGMP snooping tradicional, incluindo:
 
-- source-defined trees,
-    
-- priority-aware replication,
-    
-- domain-specific multicast strategies.
-    
+- árvores definidas pela origem,
+- replicação sensível a prioridades,
+- estratégias multicast específicas por domínio.
 
 ---
 
-## 9. Baseline vs. Adapted Architecture
+## 9. Arquitetura Baseline vs. Adaptada
 
-The architecture explicitly supports comparative experimentation:
+A arquitetura oferece suporte explícito a experimentação comparativa:
 
-- **Baseline**: static L2 configuration, no L2i intervention.
-    
-- **Adapt**: L2i-driven dynamic adaptation.
-    
+- **Baseline**: configuração estática de L2, sem intervenção do L2i.
+- **Adapt**: adaptação dinâmica conduzida pelo L2i.
 
-Similarly, execution can be:
+Da mesma forma, a execução pode ser:
 
-- **Mock**: logical execution with instrumentation,
-    
-- **Real**: actual enforcement via tc, NETCONF, or P4.
-    
+- **Mock**: execução lógica com instrumentação,
+- **Real**: aplicação efetiva via tc, NETCONF ou P4.
 
-This duality is fundamental for scientific validation and reproducibility.
+Essa dualidade é fundamental para validação científica e reprodutibilidade.
 
 ---
 
-## 10. Architectural Guarantees
+## 10. Garantias Arquiteturais
 
-The architecture guarantees:
+A arquitetura garante:
 
-- **Separation of concerns** (specification ≠ execution),
-    
-- **Portability** across L2 technologies,
-    
-- **Incremental deployability**,
-    
-- **Extensibility** without redesign,
-    
-- **Scientific observability** for experimentation.
-    
+- **Separação de responsabilidades** (especificação ≠ execução),
+- **Portabilidade** entre tecnologias de L2,
+- **Implantação incremental**,
+- **Extensibilidade** sem reprojeto,
+- **Observabilidade científica** para experimentação.
 
 ---
 
-## 11. Architectural Scope and Limitations
+## 11. Escopo e Limitações Arquiteturais
 
-Current scope:
+Escopo atual:
 
-- Link-layer adaptation (L2),
-    
-- QoS and multicast semantics,
-    
-- Multi-domain experimentation.
-    
+- adaptação na camada de enlace (L2),
+- semânticas de QoS e multicast,
+- experimentação multidomínio.
 
-Out of scope (by design):
+Fora do escopo (por projeto):
 
-- end-to-end transport protocols,
-    
-- centralized SDN control planes,
-    
-- protocol-specific signaling.
-    
+- protocolos de transporte fim a fim,
+- planos de controle SDN centralizados,
+- sinalização específica de protocolos.
 
-These boundaries preserve architectural clarity and focus.
+Esses limites preservam a clareza e o foco arquitetural.
 
 ---
 
-## 12. Summary
+## 12. Síntese
 
-The L2i architecture establishes a **new abstraction boundary for the link layer**, enabling intent-oriented adaptation without sacrificing performance or deployability.
+A arquitetura do L2i estabelece um **novo limite de abstração para a camada de enlace**, permitindo adaptação orientada a intenções sem sacrificar desempenho ou implantabilidade.
 
-By grounding declarative specifications in real execution backends, the framework bridges the gap between **network programmability** and **practical multi-domain operation**, positioning L2i as a foundational building block for future L2 architectures.
+Ao fundamentar especificações declarativas em backends reais de execução, o framework reduz a lacuna entre **programabilidade de redes** e **operação prática em ambientes multidomínio**, posicionando o L2i como um bloco fundamental para futuras arquiteturas de L2.
 
----
