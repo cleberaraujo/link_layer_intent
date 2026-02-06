@@ -1,0 +1,42 @@
+{
+  "scenario": "S1_unicast_multidomain_qos",
+  "timestamp_utc": "20251013T000327Z",
+  "mode": "adapt",
+  "params": {
+    "duration": 30,
+    "be_mbps": 60
+  },
+  "plans": {
+    "A": "ok",
+    "B": "ok",
+    "C": "ok"
+  },
+  "backends": {
+    "A": [
+      "legacy_exec"
+    ],
+    "B": [
+      "netconf_like"
+    ],
+    "C": [
+      "p4runtime_like"
+    ]
+  },
+  "artifacts": {
+    "domains": {
+      "A": "results/json/dom_A_20251013T000327Z.json",
+      "B": "results/json/dom_B_20251013T000327Z.json",
+      "C": "results/json/dom_C_20251013T000327Z.json"
+    },
+    "iperf3_intent_json": "results/json/S1_20251013T000327Z_iperf3_intent.json",
+    "rtt_samples_csv": "results/json/S1_20251013T000327Z_rtt_samples.csv",
+    "preflight_log": "results/json/S1_20251013T000327Z_preflight_ping.txt"
+  },
+  "metrics": {
+    "throughput_mbps": 6.999735003409623,
+    "rtt_p50_ms": 19.3,
+    "rtt_p95_ms": 20.4,
+    "rtt_p99_ms": 20.8,
+    "rtt_samples": 600
+  }
+}

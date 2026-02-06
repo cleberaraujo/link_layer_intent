@@ -1,0 +1,104 @@
+{
+  "backend_chain": [
+    "l2i.backends._shim_real_p4"
+  ],
+  "applied": true,
+  "env_params": {
+    "bwC_mbps": 100.0
+  },
+  "target": {
+    "address": "127.0.0.1:9559",
+    "device_id": 0,
+    "election_id": [
+      0,
+      100
+    ],
+    "manage_switch": false,
+    "dst_ip": "10.0.0.3"
+  },
+  "readback_dump": "[embedded]",
+  "responses": [
+    {
+      "backend": "l2i.backends._shim_real_p4",
+      "applied": true,
+      "response": {
+        "domain": {
+          "name": "C"
+        },
+        "intent": {
+          "class": "prio10",
+          "min_mbps": 4.0,
+          "max_mbps": 0.0
+        },
+        "target": {
+          "address": "127.0.0.1:9559",
+          "device_id": 0,
+          "election_id": [
+            0,
+            100
+          ],
+          "manage_switch": false,
+          "dst_ip": "10.0.0.3"
+        },
+        "channel": "p4runtime",
+        "p4info_probe": {
+          "table_name": "MyIngress.qos_table",
+          "table_found": true,
+          "table_id": 40012654,
+          "match_field_name": "hdr.ipv4.dstAddr",
+          "match_field_found": true,
+          "match_field_id": 1,
+          "match_type": 3,
+          "match_type_name": "LPM",
+          "actions": [
+            {
+              "action_id": 29261492,
+              "action_name": "MyIngress.set_dscp",
+              "params": [
+                {
+                  "name": "new_dscp",
+                  "id": 1
+                }
+              ]
+            },
+            {
+              "action_id": 21257015,
+              "action_name": "NoAction",
+              "params": []
+            }
+          ]
+        },
+        "arbitration": {
+          "requested_election_id": [
+            0,
+            100
+          ],
+          "status": {
+            "ok": true,
+            "is_primary": true,
+            "message": "arbitration_status_code=0 msg=Is primary"
+          }
+        },
+        "exec": {
+          "ok": true,
+          "stderr": "",
+          "detail": "",
+          "write_error_but_verified": false
+        },
+        "installed_rule": {
+          "table": "MyIngress.qos_table",
+          "table_id": 40012654,
+          "match": "hdr.ipv4.dstAddr=10.0.0.3/32",
+          "action": "MyIngress.set_dscp",
+          "action_id": 29261492,
+          "new_dscp": 8,
+          "election_id": [
+            0,
+            100
+          ]
+        },
+        "readback_dump": "# Readback table=MyIngress.qos_table table_id=40012654 responses=1\ntable_id: 40012654\nmatch {\n  field_id: 1\n  lpm {\n    value: \"\\n\\000\\000\\003\"\n    prefix_len: 32\n  }\n}\naction {\n  action {\n    action_id: 29261492\n    params {\n      param_id: 1\n      value: \"\\010\"\n    }\n  }\n}\n---\n# entries=1\n"
+      }
+    }
+  ]
+}

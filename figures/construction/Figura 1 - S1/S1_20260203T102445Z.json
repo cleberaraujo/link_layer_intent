@@ -1,0 +1,84 @@
+{
+  "scenario": "S1_unicast_qos",
+  "timestamp_utc": "20260203T102445Z",
+  "mode": "adapt",
+  "backend_mode": "real",
+  "spec_path": "specs/valid/s1_unicast_qos.json",
+  "intent": {
+    "latency_pctl": "P99",
+    "latency_max_ms": 30.0,
+    "bandwidth_min_mbps": 4.0,
+    "bandwidth_max_mbps": 0.0,
+    "priority": "high"
+  },
+  "environment": {
+    "bwA_mbps": 100.0,
+    "bwB_mbps": 25.0,
+    "bwC_mbps": 100.0,
+    "delay_ms": 1.0,
+    "be_mbps": 0.0,
+    "flow_mbps": 80.0
+  },
+  "endpoints": {
+    "flow": {
+      "src": "h1",
+      "dst": "h3",
+      "dst_ip": "10.0.0.3"
+    },
+    "be": {
+      "src": "h1",
+      "dst": "h2",
+      "dst_ip": "10.0.0.2"
+    }
+  },
+  "targets": {
+    "B": {
+      "host": "127.0.0.1",
+      "port": 830,
+      "user": "dev",
+      "password": "***",
+      "timeout": 10
+    },
+    "C": {
+      "address": "127.0.0.1:9559",
+      "device_id": 0,
+      "election_id": [
+        0,
+        100
+      ],
+      "manage_switch": false,
+      "dst_ip": "10.0.0.3"
+    }
+  },
+  "backend_apply": {
+    "A": true,
+    "B": true,
+    "C": true
+  },
+  "artifacts": {
+    "domA_json": "/home/dev/net-dev/dsl/results/S1/S1_20260203T102445Z_dom_A.json",
+    "domB_json": "/home/dev/net-dev/dsl/results/S1/S1_20260203T102445Z_dom_B.json",
+    "domC_json": "/home/dev/net-dev/dsl/results/S1/S1_20260203T102445Z_dom_C.json",
+    "preflight_flow": "/home/dev/net-dev/dsl/results/S1/S1_20260203T102445Z_preflight_flow.txt",
+    "rtt_flow_csv": "/home/dev/net-dev/dsl/results/S1/S1_20260203T102445Z_rtt_flow.csv",
+    "iperf_flow_json": "/home/dev/net-dev/dsl/results/S1/S1_20260203T102445Z_iperf_flow.json",
+    "iperf_be_json": "/home/dev/net-dev/dsl/results/S1/S1_20260203T102445Z_iperf_be.json",
+    "tc_dump_A_txt": "/home/dev/net-dev/dsl/results/S1/S1_20260203T102445Z_tc_dump_A.txt",
+    "netconf_dump_B_txt": "/home/dev/net-dev/dsl/results/S1/S1_20260203T102445Z_netconf_dump_B.txt",
+    "p4_dump_C_txt": "/home/dev/net-dev/dsl/results/S1/S1_20260203T102445Z_p4_dump_C.txt",
+    "summary_json": "/home/dev/net-dev/dsl/results/S1/S1_20260203T102445Z.json"
+  },
+  "metrics": {
+    "rtt_pctl": "P99",
+    "rtt_pctl_ms": 0.822,
+    "rtt_n": 80,
+    "delivery_ratio": 1.0,
+    "flow_throughput_mbps": 23.042,
+    "be_throughput_mbps": 0
+  },
+  "conformance": {
+    "latency_ok": true,
+    "bandwidth_ok": true,
+    "intent_ok": true
+  }
+}

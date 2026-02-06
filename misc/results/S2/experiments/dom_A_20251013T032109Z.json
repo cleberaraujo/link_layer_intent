@@ -1,0 +1,19 @@
+{
+  "status": "ok",
+  "ir": {
+    "plan_id": "ir-A-20251013T032109Z",
+    "flow_id": "S2_Multicast",
+    "actions": [],
+    "constraints": {},
+    "atomic": false
+  },
+  "policy": {
+    "applied": false
+  },
+  "capabilities": {
+    "checked": true
+  },
+  "backends": [],
+  "artifacts": {},
+  "errors": []
+}

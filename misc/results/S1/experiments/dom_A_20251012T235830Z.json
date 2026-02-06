@@ -1,0 +1,45 @@
+{
+  "status": "ok",
+  "ir": {
+    "plan_id": "ir-A-20251012T235832Z",
+    "flow_id": "S1_UnicastQoS",
+    "actions": [
+      {
+        "type": "ReserveMinRate",
+        "params": {
+          "min_mbps": 4.0
+        }
+      },
+      {
+        "type": "CapMaxRate",
+        "params": {
+          "max_mbps": 7.0
+        }
+      },
+      {
+        "type": "SetPriority",
+        "params": {
+          "level": "high"
+        }
+      }
+    ],
+    "constraints": {
+      "latency": {
+        "max_ms": 30.0,
+        "percentile": "P99"
+      }
+    },
+    "atomic": false
+  },
+  "policy": {
+    "applied": true
+  },
+  "capabilities": {
+    "checked": true
+  },
+  "backends": [
+    "legacy_exec"
+  ],
+  "artifacts": {},
+  "errors": []
+}

@@ -1,0 +1,23 @@
+{
+  "status": "ok",
+  "ir": {
+    "plan_id": "ir-C-20251013T034614Z",
+    "flow_id": "S2_Multicast",
+    "actions": [],
+    "constraints": {},
+    "atomic": true
+  },
+  "policy": {
+    "applied": true
+  },
+  "capabilities": {
+    "checked": true
+  },
+  "backends": [
+    "p4runtime_like"
+  ],
+  "artifacts": {
+    "p4runtime": "{\n  \"write_request\": {\n    \"device_id\": \"p4_device_1\",\n    \"l2mc_groups\": [\n      {\n        \"group_id\": 101,\n        \"replicas\": [\n          {\n            \"port\": \"h5-eth0\"\n          }\n        ]\n      }\n    ]\n  }\n}"
+  },
+  "errors": []
+}

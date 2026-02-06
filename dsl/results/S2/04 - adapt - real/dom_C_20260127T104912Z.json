@@ -1,0 +1,24 @@
+{
+  "backend_chain": [
+    "l2i.backends._shim_real_p4"
+  ],
+  "applied": true,
+  "responses": [
+    {
+      "backend": "l2i.backends._shim_real_p4",
+      "applied": true,
+      "response": [
+        true,
+        {
+          "address": "127.0.0.1:9559",
+          "device_id": 0,
+          "echo_intent": {
+            "name": "C"
+          },
+          "connected": true,
+          "pipeline_loaded": false
+        }
+      ]
+    }
+  ]
+}

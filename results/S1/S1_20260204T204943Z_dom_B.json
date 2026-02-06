@@ -1,0 +1,40 @@
+{
+  "backend_chain": [
+    "l2i.backends._shim_mock_netconf"
+  ],
+  "applied": true,
+  "env_params": {
+    "bwB_mbps": 50.0
+  },
+  "target": null,
+  "responses": [
+    {
+      "backend": "l2i.backends._shim_mock_netconf",
+      "applied": true,
+      "response": {
+        "backend": "netconf_mock",
+        "planned": {
+          "kind": "netconf",
+          "rpc": "edit-config",
+          "edit_config_count": 1,
+          "patch_count": 1,
+          "payload_bytes": 121,
+          "target": "running"
+        },
+        "executed": {
+          "simulated": true,
+          "ok": true
+        },
+        "request": {
+          "backend": null,
+          "intent": {
+            "class": "prio10",
+            "min_mbps": 4.0,
+            "max_mbps": 0.0
+          },
+          "xml": "<config>\n  <l2i>\n    <qos>\n      <priority>best_effort</priority>\n      <be_mbps></be_mbps>\n    </qos>\n  </l2i>\n</config>"
+        }
+      }
+    }
+  ]
+}

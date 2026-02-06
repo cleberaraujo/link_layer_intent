@@ -1,0 +1,57 @@
+{
+  "backend_chain": [
+    "l2i.backends._shim_real_netconf"
+  ],
+  "applied": true,
+  "responses": [
+    {
+      "backend": "l2i.backends._shim_real_netconf",
+      "applied": true,
+      "response": [
+        true,
+        {
+          "domain": {
+            "name": "B"
+          },
+          "host": "127.0.0.1",
+          "port": 830,
+          "connected": true,
+          "capabilities": [
+            "urn:ietf:params:netconf:base:1.0",
+            "urn:ietf:params:netconf:base:1.1",
+            "urn:ietf:params:netconf:capability:writable-running:1.0",
+            "urn:ietf:params:netconf:capability:candidate:1.0",
+            "urn:ietf:params:netconf:capability:confirmed-commit:1.1",
+            "urn:ietf:params:netconf:capability:rollback-on-error:1.0",
+            "urn:ietf:params:netconf:capability:validate:1.1",
+            "urn:ietf:params:netconf:capability:startup:1.0",
+            "urn:ietf:params:netconf:capability:xpath:1.0",
+            "urn:ietf:params:netconf:capability:with-defaults:1.0?basic-mode=explicit&also-supported=report-all,report-all-tagged,trim,explicit",
+            "urn:ietf:params:netconf:capability:notification:1.0",
+            "urn:ietf:params:netconf:capability:interleave:1.0",
+            "urn:ietf:params:netconf:capability:url:1.0?scheme=scp,http,https,ftp,sftp,ftps,file",
+            "urn:ietf:params:xml:ns:yang:ietf-yang-metadata?module=ietf-yang-metadata&revision=2016-08-05",
+            "urn:ietf:params:xml:ns:yang:1?module=yang&revision=2022-06-16",
+            "urn:ietf:params:xml:ns:yang:ietf-inet-types?module=ietf-inet-types&revision=2013-07-15",
+            "urn:ietf:params:xml:ns:yang:ietf-yang-types?module=ietf-yang-types&revision=2013-07-15",
+            "urn:ietf:params:netconf:capability:yang-library:1.1?revision=2019-01-04&content-id=1",
+            "urn:ietf:params:xml:ns:yang:ietf-netconf-acm?module=ietf-netconf-acm&revision=2018-02-14",
+            "urn:sysrepo:plugind?module=sysrepo-plugind&revision=2022-08-26",
+            "urn:ietf:params:xml:ns:netconf:base:1.0?module=ietf-netconf&revision=2013-09-29&features=writable-running,candidate,confirmed-commit,rollback-on-error,validate,startup,url,xpath",
+            "urn:ietf:params:xml:ns:yang:ietf-netconf-with-defaults?module=ietf-netconf-with-defaults&revision=2011-06-01",
+            "urn:ietf:params:xml:ns:yang:ietf-netconf-notifications?module=ietf-netconf-notifications&revision=2012-02-06",
+            "urn:ietf:params:xml:ns:yang:ietf-netconf-monitoring?module=ietf-netconf-monitoring&revision=2010-10-04",
+            "urn:ietf:params:xml:ns:netmod:notification?module=nc-notifications&revision=2008-07-14",
+            "urn:ietf:params:xml:ns:netconf:notification:1.0?module=notifications&revision=2008-07-14",
+            "urn:ietf:params:xml:ns:yang:ietf-x509-cert-to-name?module=ietf-x509-cert-to-name&revision=2014-12-10",
+            "urn:ietf:params:xml:ns:yang:iana-crypt-hash?module=iana-crypt-hash&revision=2014-08-06"
+          ],
+          "edit_config_ok": true,
+          "running_snapshot": "<rpc-reply xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\" message-id=\"urn:uuid:8893e4c8-214b-4869-bb7d-d1299cc93c1d\"><data><qos xmlns=\"urn:l2i:qos\"><class>prio10</class><min-mbps>4</min-mbps><max-mbps>7</max-mbps></qos></data></rpc-reply>",
+          "error": null,
+          "xml_sent": "<config xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n  <qos xmlns=\"urn:l2i:qos\">\n    <class>prio10</class>\n    <min-mbps>4</min-mbps>\n    <max-mbps>7</max-mbps>\n  </qos>\n</config>"
+        }
+      ]
+    }
+  ]
+}

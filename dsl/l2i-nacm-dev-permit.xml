@@ -1,0 +1,29 @@
+<ietf-netconf-acm xmlns="urn:ietf:params:xml:ns:yang:ietf-netconf-acm">
+  <!-- Deixar NACM ligado, mas permissivo por padrão -->
+  <enable-nacm>true</enable-nacm>
+
+  <!-- Defaults bem permissivos para ambiente de laboratório -->
+  <read-default>permit</read-default>
+  <write-default>permit</write-default>
+  <exec-default>permit</exec-default>
+
+  <!-- Grupo para o usuário dev -->
+  <groups>
+    <group>
+      <name>dev-group</name>
+      <user-name>dev</user-name>
+    </group>
+  </groups>
+
+  <!-- Regra explícita para módulo l2i-qos (não é estritamente necessária se os defaults forem permit, mas é bom para documentação) -->
+  <rule-list>
+    <name>dev-all-l2i</name>
+    <group>dev-group</group>
+    <rule>
+      <name>permit-l2i-qos-all</name>
+      <module-name>l2i-qos</module-name>
+      <access-operations>*</access-operations>
+      <action>permit</action>
+    </rule>
+  </rule-list>
+</ietf-netconf-acm>

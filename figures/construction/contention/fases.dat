@@ -1,0 +1,4 @@
+# Fase          Inicio  Fim    RTT_B  RTT_C  Deliv_B  Deliv_C
+pre_event       0       10000  0.4    0.2    0.97     0.97
+join            10000   15000  0.6    2.0    0.96     0.96
+post_event      15000   30000  0.6    0.3    0.973    0.973

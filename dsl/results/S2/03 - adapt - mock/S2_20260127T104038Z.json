@@ -1,0 +1,68 @@
+{
+  "scenario": "S2_multicast_source_oriented",
+  "timestamp_utc": "20260127T104038Z",
+  "mode": "adapt",
+  "backend_mode": "mock",
+  "params": {
+    "duration": 30,
+    "be_mbps": 30.0,
+    "bwA": 100,
+    "bwB": 100,
+    "bwC": 100,
+    "delay_ms": 1
+  },
+  "plans": {
+    "A": "ok",
+    "B": "ok",
+    "C": "ok"
+  },
+  "backends": {
+    "A": [
+      "linux_tc_local"
+    ],
+    "B": [
+      "l2i.backends._shim_mock_netconf"
+    ],
+    "C": [
+      "l2i.backends._shim_mock_p4"
+    ]
+  },
+  "artifacts": {
+    "domains": {
+      "A": "/home/dev/net-dev/dsl/results/json/dom_A_20260127T104038Z.json",
+      "B": "/home/dev/net-dev/dsl/results/json/dom_B_20260127T104038Z.json",
+      "C": "/home/dev/net-dev/dsl/results/json/dom_C_20260127T104038Z.json"
+    },
+    "preflight_B": "/home/dev/net-dev/dsl/results/json/20260127T104038Z_preflight_B.txt",
+    "preflight_C": "/home/dev/net-dev/dsl/results/json/20260127T104038Z_preflight_C.txt",
+    "iperf_B_json": "/home/dev/net-dev/dsl/results/json/20260127T104038Z_iperf_B.json",
+    "iperf_C_json": "/home/dev/net-dev/dsl/results/json/20260127T104038Z_iperf_C.json",
+    "rtt_B_csv": "/home/dev/net-dev/dsl/results/json/20260127T104038Z_rtt_B.csv",
+    "rtt_C_csv": "/home/dev/net-dev/dsl/results/json/20260127T104038Z_rtt_C.csv",
+    "summary_json": "/home/dev/net-dev/dsl/results/json/S2_20260127T104038Z.json"
+  },
+  "metrics": {
+    "B": {
+      "delivery_ratio": 1.0,
+      "throughput_mbps": 30.02291,
+      "throughput_valid": true,
+      "jitter_ms": 0.0,
+      "join_time_s": 0.0,
+      "rtt_p50_ms": 0.1,
+      "rtt_p95_ms": 0.1,
+      "rtt_p99_ms": 0.2,
+      "rtt_samples": 400
+    },
+    "C": {
+      "delivery_ratio": 0.0,
+      "throughput_mbps": 0.0,
+      "throughput_valid": false,
+      "jitter_ms": 0.0,
+      "join_time_s": 0.0,
+      "rtt_p50_ms": 0.0,
+      "rtt_p95_ms": 0.0,
+      "rtt_p99_ms": 0.0,
+      "rtt_samples": 0
+    }
+  }
+}

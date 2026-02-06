@@ -1,0 +1,101 @@
+{
+  "status": "ok",
+  "ir": {
+    "plan_id": "ir-A-20251013T000116Z",
+    "flow_id": "S1_UnicastQoS",
+    "actions": [
+      {
+        "type": "ReserveMinRate",
+        "params": {
+          "min_mbps": 4.0
+        }
+      },
+      {
+        "type": "CapMaxRate",
+        "params": {
+          "max_mbps": 7.0
+        }
+      },
+      {
+        "type": "SetPriority",
+        "params": {
+          "level": "high"
+        }
+      }
+    ],
+    "constraints": {
+      "latency": {
+        "max_ms": 30.0,
+        "percentile": "P99"
+      }
+    },
+    "atomic": false
+  },
+  "policy": {
+    "applied": true
+  },
+  "capabilities": {
+    "checked": true
+  },
+  "backends": [
+    "legacy_exec"
+  ],
+  "artifacts": {
+    "tc_cmds": [
+      [
+        "tc qdisc del dev h1-eth0 root || true",
+        "tc qdisc add dev h1-eth0 root handle 1: htb default 30 r2q 250",
+        "tc class add dev h1-eth0 parent 1: classid 1:30 htb rate 100mbit ceil 100mbit prio 7",
+        "tc qdisc add dev h1-eth0 parent 1:30 handle 30: sfq perturb 10",
+        "tc class add dev h1-eth0 parent 1: classid 1:10 htb rate 4000kbit ceil 7000kbit prio 1 quantum 1514",
+        "tc qdisc add dev h1-eth0 parent 1:10 handle 10: sfq perturb 10",
+        "tc filter add dev h1-eth0 protocol ip parent 1: prio 2 u32 match ip protocol 0x0000 flowid 1:10"
+      ],
+      [
+        {
+          "cmd": "tc qdisc del dev h1-eth0 root || true",
+          "rc": 0,
+          "out": "",
+          "err": ""
+        },
+        {
+          "cmd": "tc qdisc add dev h1-eth0 root handle 1: htb default 30 r2q 250",
+          "rc": 0,
+          "out": "",
+          "err": ""
+        },
+        {
+          "cmd": "tc class add dev h1-eth0 parent 1: classid 1:30 htb rate 100mbit ceil 100mbit prio 7",
+          "rc": 0,
+          "out": "",
+          "err": ""
+        },
+        {
+          "cmd": "tc qdisc add dev h1-eth0 parent 1:30 handle 30: sfq perturb 10",
+          "rc": 0,
+          "out": "",
+          "err": ""
+        },
+        {
+          "cmd": "tc class add dev h1-eth0 parent 1: classid 1:10 htb rate 4000kbit ceil 7000kbit prio 1 quantum 1514",
+          "rc": 0,
+          "out": "",
+          "err": ""
+        },
+        {
+          "cmd": "tc qdisc add dev h1-eth0 parent 1:10 handle 10: sfq perturb 10",
+          "rc": 0,
+          "out": "",
+          "err": ""
+        },
+        {
+          "cmd": "tc filter add dev h1-eth0 protocol ip parent 1: prio 2 u32 match ip protocol 0x0000 flowid 1:10",
+          "rc": 0,
+          "out": "",
+          "err": ""
+        }
+      ]
+    ]
+  },
+  "errors": []
+}

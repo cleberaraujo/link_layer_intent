@@ -1,0 +1,45 @@
+Agora que fechamos essa etapa do artigo, vamos uma dar uma pausa nele. Talvez depois nós retornamos a ele. Agora, preciso reorganizar o repositório do framework (que ficará no Github) no qual será publicado a proposta. Então preciso organizar e agregar o máximo de informações possível. Como são muitas informações, depois definimos o que ficará no README ou em outros locais.
+
+Embora não precise ser nesta ordem, preciso das seguintes informações (não necessariamente com estas letras e/ou nesta ordem):
+
+a) Visão geral da proposta;
+
+b) Objetivo geral e específicos da proposta;
+
+c) Estrutura lógica da proposta e da L2i: gramática, etc.;
+
+d) Estrutura da implementação. Descreva a organização, o que encontraremos em cada local, e suaa estrutura (vou inserir uma listagem do diretório abaixo):
+[cleber@beelink 01.v0.S1.S2]$ ls -l net-dev/dsl/
+-rw-r--r-- 1 cleber cleber 3537 out 13 08:39 cli.py
+-rw-r--r-- 1 cleber cleber 2199 out 13 08:39 compatibility_map.py
+drwxr-xr-x 1 cleber cleber  504 out 13 08:39 l2i
+drwxr-xr-x 1 cleber cleber  240 out 13 08:39 profiles
+drwxr-xr-x 1 cleber cleber   44 out 13 08:39 results
+drwxr-xr-x 1 cleber cleber  326 out 13 08:39 scenarios
+drwxr-xr-x 1 cleber cleber   66 out 13 08:39 schemas
+drwxr-xr-x 1 cleber cleber  880 out 13 08:39 scripts
+drwxr-xr-x 1 cleber cleber   24 out 13 08:39 specs
+drwxr-xr-x 1 cleber cleber   40 out 13 08:39 tools
+[cleber@beelink 01.v0.S1.S2]$
+
+e) Explicar o que é baseline, adapt, mock e real. Dê exemplos científicos. Mostra como realizar os experimentos (comandos):
+e.1) baseline + mock
+e.2) baseline + real
+e.3) adapt + mock
+e.4) adapt + real
+
+f) Informe quais parâmetros que podem ser configurados para visualizar melhor a proposta. Me refiro a bwA, bwB, bwC, ou ainda outros parâmetros... dê exemplos. Informe os valores esperados em cada um dos experimentos.
+
+g) Explique os parâmetros realizados nos experimentos e seus valores default. Vou colocar alguns, mas pode haver mais: --spec, --duration, --be-mbps, --bwA/B/C,--delay-ms,--mode, --backend, --retries, --pause
+
+h) Explique o funcionamento de cada um dos script criados. Para que serve, como funciona, dê exemplos. Sobretudo destes: aggregate_results.py, cleanup_net.sh, plot_p99.py, plot_s1_heatmap.py, plot_s1_pivots.py, plot_s2_cdfs.py, plot_s2_curves.py, plot_s2_facets.py, plot_s2_heatmaps.py, plot_s2_improvement_map.py, plot_s2_multicast_tree.py, plot_s2_pareto.py, run_batch.py, run_s1_batch.py, s1_compare.py, s2_compare.py, sweep_s1.py, sweep_s2.py.
+
+i) Informe os passos necessários para realizar os experimentos após reiniciar o PC;
+
+j) Informe as dependências e como instalá-las (utilizando o Ubuntu Server 24.04 LTS como referência). Aqui, lembro de algumas: sudo apt install -y fping graphviz iperf3 iproute2 iputils-ping iproute2 mininet net-tools python3 python3-grpcio python3-ipython python3-jsonschema python3-matplotlib python3-pip python3-protobuf python3-thrift python3-yaml; sudo add-apt-repository universe -y; sudo apt-get install -y python3-grpcio python3-protobuf python3-googleapis-common-proto python3-ipython.
+
+l) Cite aquilo que é necessário compilar/instalar via venv. Que estão em net-src.
+
+Estas informações que eu coloquei são para referência, pode adicionar ou modificá-las à vontade. Pode complementar à vontade. O objetivo é contribuir com o máximo de informações a respeito da proposta. Inclusive, caso queira, pode separar a resposta em várias mensagens para evitar respostas grandes (se assim você quiser).
+
+Com o intuito de te ajudar com as informações, vou anexar aqui 3 arquivos que montei ao longo do desenvolvimento. Talvez não estejam atualizados, mas servirá como referência, inclusive para reaproveitar informações.

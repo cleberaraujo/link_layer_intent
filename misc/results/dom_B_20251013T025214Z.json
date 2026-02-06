@@ -1,0 +1,23 @@
+{
+  "status": "ok",
+  "ir": {
+    "plan_id": "ir-B-20251013T025214Z",
+    "flow_id": "S2_Multicast",
+    "actions": [],
+    "constraints": {},
+    "atomic": false
+  },
+  "policy": {
+    "applied": true
+  },
+  "capabilities": {
+    "checked": true
+  },
+  "backends": [
+    "netconf_like"
+  ],
+  "artifacts": {
+    "netconf": "{\n  \"rpc\": \"edit-config\",\n  \"target\": \"running\",\n  \"config\": {\n    \"l2i:multicast\": {\n      \"group\": \"G1\",\n      \"mode\": \"vlan_flood\",\n      \"egress\": [\n        \"h3-eth0\"\n      ]\n    }\n  }\n}"
+  },
+  "errors": []
+}

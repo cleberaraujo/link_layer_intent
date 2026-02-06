@@ -1,0 +1,8 @@
+# Time_End  RTT_B   RTT_C   Deliv_B
+500         1.06    0.13    1.0
+1000        0.075   0.098   1.0
+1500        0.34    0.155   1.0
+2000        0.088   0.104   1.0
+2500        0.135   0.188   1.0
+3000        0.1     0.107   1.0
+# ... continue com os demais pontos conforme necessário

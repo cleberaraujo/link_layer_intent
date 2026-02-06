@@ -1,0 +1,1 @@
+<rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:d23c801a-9570-4925-9298-62055e0e1367"><data><qos xmlns="urn:l2i:qos"><class>prio20</class><min-mbps>2</min-mbps><max-mbps>5</max-mbps></qos></data></rpc-reply>

@@ -1,0 +1,47 @@
+{
+  "status": "ok",
+  "ir": {
+    "plan_id": "ir-C-20251013T003845Z",
+    "flow_id": "S1_UnicastQoS",
+    "actions": [
+      {
+        "type": "ReserveMinRate",
+        "params": {
+          "min_mbps": 4.0
+        }
+      },
+      {
+        "type": "CapMaxRate",
+        "params": {
+          "max_mbps": 7.0
+        }
+      },
+      {
+        "type": "SetPriority",
+        "params": {
+          "level": "high"
+        }
+      }
+    ],
+    "constraints": {
+      "latency": {
+        "max_ms": 30.0,
+        "percentile": "P99"
+      }
+    },
+    "atomic": true
+  },
+  "policy": {
+    "applied": true
+  },
+  "capabilities": {
+    "checked": true
+  },
+  "backends": [
+    "p4runtime_like"
+  ],
+  "artifacts": {
+    "p4runtime": "{\n  \"write_request\": {\n    \"device_id\": \"p4_device_1\",\n    \"plan_id\": \"ir-C-20251013T003845Z\",\n    \"flow_id\": \"S1_UnicastQoS\",\n    \"tables\": [\n      {\n        \"table\": \"ingress.qos.mark\",\n        \"action\": \"set_dscp\",\n        \"params\": {\n          \"dscp\": 46\n        }\n      }\n    ],\n    \"meters\": {\n      \"min_mbps\": 4.0,\n      \"max_mbps\": 7.0\n    }\n  }\n}"
+  },
+  "errors": []
+}

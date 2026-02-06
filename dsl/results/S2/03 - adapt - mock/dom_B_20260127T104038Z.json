@@ -1,0 +1,25 @@
+{
+  "backend_chain": [
+    "l2i.backends._shim_mock_netconf"
+  ],
+  "applied": true,
+  "responses": [
+    {
+      "backend": "l2i.backends._shim_mock_netconf",
+      "applied": true,
+      "response": {
+        "backend": "netconf_mock",
+        "applied": true,
+        "request": {
+          "operation": "edit-config",
+          "target": "running",
+          "payload_xml": "<config>\n  <qos xmlns=\"urn:example:qos\">\n    <class>prio10</class>\n    <min-mbps>4.000</min-mbps>\n    <max-mbps>7.000</max-mbps>\n  </qos>\n</config>"
+        },
+        "ctx_seen": {
+          "host": null,
+          "port": null
+        }
+      }
+    }
+  ]
+}

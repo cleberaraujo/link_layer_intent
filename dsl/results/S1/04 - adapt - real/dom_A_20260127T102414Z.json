@@ -1,0 +1,9 @@
+{
+  "backend": "linux_tc_local",
+  "applied": true,
+  "params": {
+    "class": "prio10",
+    "min_mbps": 4,
+    "max_mbps": 7
+  }
+}

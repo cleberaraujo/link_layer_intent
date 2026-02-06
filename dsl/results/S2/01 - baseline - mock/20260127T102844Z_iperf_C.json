@@ -1,0 +1,5 @@
+{
+  "error": "iperf3 failed",
+  "stdout": "{\n\t\"start\":\t{\n\t\t\"connected\":\t[],\n\t\t\"version\":\t\"iperf 3.16\",\n\t\t\"system_info\":\t\"Linux vbox 6.8.0-87-generic #88-Ubuntu SMP PREEMPT_DYNAMIC Sat Oct 11 09:28:41 UTC 2025 x86_64\"\n\t},\n\t\"intervals\":\t[],\n\t\"end\":\t{\n\t},\n\t\"error\":\t\"unable to connect to server - server may have stopped running or use a different port, firewall issue, etc.: No route to host\"\n}\n",
+  "stderr": ""
+}

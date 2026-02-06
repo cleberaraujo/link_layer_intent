@@ -1,0 +1,44 @@
+{
+  "scenario": "S1_unicast_multidomain_qos",
+  "timestamp_utc": "20260127T102414Z",
+  "mode": "adapt",
+  "backend_mode": "real",
+  "params": {
+    "duration": 30,
+    "be_mbps": 30.0
+  },
+  "plans": {
+    "A": "ok",
+    "B": "ok",
+    "C": "ok"
+  },
+  "backends": {
+    "A": [
+      "linux_tc_local"
+    ],
+    "B": [
+      "l2i.backends._shim_real_netconf"
+    ],
+    "C": [
+      "l2i.backends._shim_real_p4"
+    ]
+  },
+  "artifacts": {
+    "summary_json": "/home/dev/net-dev/dsl/results/json/S1_20260127T102414Z.json",
+    "iperf3_intent_json": "/home/dev/net-dev/dsl/results/json/S1_20260127T102414Z_iperf3_intent.json",
+    "rtt_samples_csv": "/home/dev/net-dev/dsl/results/json/S1_20260127T102414Z_rtt_samples.csv",
+    "preflight_log": "/home/dev/net-dev/dsl/results/json/S1_20260127T102414Z_preflight_ping.txt",
+    "domains": {
+      "A": "/home/dev/net-dev/dsl/results/json/dom_A_20260127T102414Z.json",
+      "B": "/home/dev/net-dev/dsl/results/json/dom_B_20260127T102414Z.json",
+      "C": "/home/dev/net-dev/dsl/results/json/dom_C_20260127T102414Z.json"
+    }
+  },
+  "metrics": {
+    "throughput_mbps": 30.02266,
+    "rtt_p50_ms": 0.1,
+    "rtt_p95_ms": 0.1,
+    "rtt_p99_ms": 0.2,
+    "rtt_samples": 600
+  }
+}

@@ -1,0 +1,20 @@
+# Readback table=MyIngress.qos_table table_id=40012654 responses=1
+table_id: 40012654
+match {
+  field_id: 1
+  lpm {
+    value: "\n\000\000\004"
+    prefix_len: 32
+  }
+}
+action {
+  action {
+    action_id: 29261492
+    params {
+      param_id: 1
+      value: "\020"
+    }
+  }
+}
+---
+# entries=1

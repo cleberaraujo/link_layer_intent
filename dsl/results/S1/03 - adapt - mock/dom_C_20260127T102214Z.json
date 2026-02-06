@@ -1,0 +1,38 @@
+{
+  "backend_chain": [
+    "l2i.backends._shim_mock_p4"
+  ],
+  "applied": true,
+  "responses": [
+    {
+      "backend": "l2i.backends._shim_mock_p4",
+      "applied": true,
+      "response": {
+        "backend": "p4_mock",
+        "applied": true,
+        "table_mods": [
+          {
+            "table": "qos.class_map",
+            "match": {
+              "flow_class": "prio10"
+            },
+            "action": "set_min",
+            "param": 4.0
+          },
+          {
+            "table": "qos.class_map",
+            "match": {
+              "flow_class": "prio10"
+            },
+            "action": "set_max",
+            "param": 7.0
+          }
+        ],
+        "ctx_seen": {
+          "address": null,
+          "device_id": null
+        }
+      }
+    }
+  ]
+}

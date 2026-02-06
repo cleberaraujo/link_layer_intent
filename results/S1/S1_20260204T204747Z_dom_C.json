@@ -1,0 +1,21 @@
+{
+  "backend_chain": [
+    "l2i.backends._shim_real_p4"
+  ],
+  "applied": false,
+  "env_params": {
+    "bwC_mbps": 100.0
+  },
+  "target": {
+    "address": "127.0.0.1:9559",
+    "device_id": 0,
+    "election_id": [
+      0,
+      100
+    ],
+    "manage_switch": false,
+    "dst_ip": "10.0.0.3"
+  },
+  "readback_dump": null,
+  "responses": []
+}

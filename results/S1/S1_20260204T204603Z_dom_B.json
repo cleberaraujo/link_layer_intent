@@ -1,0 +1,11 @@
+{
+  "backend_chain": [
+    "l2i.backends._shim_mock_netconf"
+  ],
+  "applied": false,
+  "env_params": {
+    "bwB_mbps": 50.0
+  },
+  "target": null,
+  "responses": []
+}

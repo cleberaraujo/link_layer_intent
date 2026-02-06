@@ -1,0 +1,53 @@
+{
+  "scenario": "S2_multicast_source_oriented",
+  "timestamp_utc": "20251013T033831Z",
+  "mode": "adapt",
+  "params": {
+    "duration": 30,
+    "be_mbps": 30.0,
+    "bwA": 100,
+    "bwB": 10,
+    "bwC": 100,
+    "delay_ms": 1
+  },
+  "plans": {
+    "A": "ok",
+    "B": "ok",
+    "C": "ok"
+  },
+  "artifacts": {
+    "domains": {
+      "A": "results/json/dom_A_20251013T033831Z.json",
+      "B": "results/json/dom_B_20251013T033831Z.json",
+      "C": "results/json/dom_C_20251013T033831Z.json"
+    },
+    "preflight_B": "results/json/20251013T033831Z_preflight_B.txt",
+    "preflight_C": "results/json/20251013T033831Z_preflight_C.txt",
+    "iperf_B_json": "results/json/20251013T033831Z_iperf_B.json",
+    "iperf_C_json": "results/json/20251013T033831Z_iperf_C.json",
+    "rtt_B_csv": "results/json/20251013T033831Z_rtt_B.csv",
+    "rtt_C_csv": "results/json/20251013T033831Z_rtt_C.csv"
+  },
+  "metrics": {
+    "B": {
+      "delivery_ratio": 1.0,
+      "throughput_mbps": 3.8855357847418,
+      "jitter_ms": 4.614954046933685,
+      "join_time_s": 0.0,
+      "rtt_p50_ms": 0.124,
+      "rtt_p95_ms": 0.159,
+      "rtt_p99_ms": 0.184,
+      "rtt_samples": 400
+    },
+    "C": {
+      "delivery_ratio": 1.0,
+      "throughput_mbps": 3.8318666239302335,
+      "jitter_ms": 6.100033559583713,
+      "join_time_s": 0.0,
+      "rtt_p50_ms": 0.123,
+      "rtt_p95_ms": 0.156,
+      "rtt_p99_ms": 0.192,
+      "rtt_samples": 400
+    }
+  }
+}

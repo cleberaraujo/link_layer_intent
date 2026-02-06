@@ -1,0 +1,16 @@
+digraph S2Tree {
+  rankdir=LR;
+  node [shape=box, style="rounded,filled", fillcolor="#eef5ff"];
+  label="S2 multicast tree (baseline)\n20251008T182211Z"; labelloc=top; fontsize=16;
+  A [label="Domínio A\nQoS/replicação na origem"];
+  B [label="Domínio B\nQoS/replicação na origem"];
+  C [label="Domínio C\nQoS/replicação na origem"];
+  h1 [shape=oval, fillcolor="#eaffea", label="h1@A (fonte)"];
+  h3 [shape=oval, fillcolor="#fff7e6", label="h3@B (receptor)"];
+  h5 [shape=oval, fillcolor="#fff7e6", label="h5@C (receptor)"];
+  h1 -> A [label="QoS origem"];
+  A -> B [label="overlay (VXLAN/GRE)"];
+  A -> C [label="overlay (VXLAN/GRE)"];
+  B -> h3 [label="deliver"];
+  C -> h5 [label="deliver"];
+}
