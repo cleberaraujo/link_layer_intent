@@ -1,6 +1,6 @@
-# L2i: Adaptação Dinâmica na Camada de Enlace via Linguagem Declarativa
+# Uma Abordagem Declarativa e Modular para Adaptação Dinâmica da Camada de Enlace de Redes Heterogêneas
 
-**L2i** é um framework de pesquisa para **adaptação dinâmica na camada de enlace (L2)**, baseado em uma **linguagem declarativa independente de tecnologia**, projetado para operar em **ambientes heterogêneos e multidomínio**.
+Framework de pesquisa para **adaptação dinâmica na camada de enlace (L2)**, baseado em uma **linguagem declarativa independente de tecnologia**, projetado para operar em **ambientes heterogêneos e multidomínio**.
 
 O projeto investiga como requisitos de comunicação — como **largura de banda, latência, prioridade e multicast orientado à origem** — podem ser expressos de forma abstrata e **materializados dinamicamente** sobre diferentes tecnologias de L2, incluindo:
 
