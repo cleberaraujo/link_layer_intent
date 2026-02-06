@@ -450,7 +450,11 @@ pip install grpcio protobuf jsonschema matplotlib pyyaml
     
 - **Resultados só são comparáveis se parâmetros forem iguais**
     
+<<<<<<< HEAD
 - **S1 e S2 têm semânticas diferentes**
+=======
+- **Os cenários S1 e S2 possuem semânticas diferentes**
+>>>>>>> 378a40c709a583783de2c5158f397e25d2a8dcd0
     
 
 ---
