@@ -36,7 +36,7 @@ Os experimentos foram executados em um **testbed real/emulado**, construído com
 - Ferramentas de medição (`iperf`, `ping`)
 - (Quando aplicável) switches programáveis via P4
 
-❗ **Não utilizamos Mininet**. A topologia é criada diretamente via scripts e namespaces.
+❗ **Não utilizamos Mininet ou controladores centralizados**. A topologia é criada diretamente via *scripts* e *namespaces*.
 
 
 ---
@@ -76,7 +76,7 @@ Avaliar a capacidade do L2i de gerenciar árvores multicast dinamicamente com ba
 
 As topologias dos cenários S1 e S2 estão ilustradas em:
 
-📄 `figures/topologias_cenarios.pdf`
+📄 [`/figures/topologias_cenarios.pdf`](/figures/topologias_cenarios.pdf)
 
 A criação das topologias é feita por scripts específicos:
 
