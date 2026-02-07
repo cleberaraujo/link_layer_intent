@@ -80,8 +80,8 @@ As topologias dos cenários S1 e S2 estão ilustradas em:
 
 A criação das topologias é feita por scripts específicos:
 
-- **Cenário S1**: [`dsl/scripts/s1_topology_setup.sh`](dsl/scripts/s1_topology_setup.sh)
-- **Cenário S2**: [`dsl/scripts/s2_topology_setup.sh`](dsl/scripts/s2_topology_setup.sh)
+- **Cenário S1**: [`/dsl/scripts/s1_topology_setup.sh`](/dsl/scripts/s1_topology_setup.sh)
+- **Cenário S2**: [`/dsl/scripts/s2_topology_setup.sh`](/dsl/scripts/s2_topology_setup.sh)
 
 ---
 
@@ -89,7 +89,7 @@ A criação das topologias é feita por scripts específicos:
 
 ### Cenário S1 – Unicast com QoS
 
-Arquivo: [`dsl/specs/valid/s1_unicast_qos.json`](dsl/specs/valid/s1_unicast_qos.json)
+Arquivo: [`/dsl/specs/valid/s1_unicast_qos.json`](/dsl/specs/valid/s1_unicast_qos.json)
 
 ```json
 {
@@ -110,7 +110,7 @@ Arquivo: [`dsl/specs/valid/s1_unicast_qos.json`](dsl/specs/valid/s1_unicast_qos.
 
 ### Cenário S2 – Multicast Orientado à Origem
 
-Arquivo: [`dsl/specs/valid/s2_multicast_source_oriented.json`](dsl/specs/valid/s2_multicast_source_oriented.json)
+Arquivo: [`/dsl/specs/valid/s2_multicast_source_oriented.json`](/dsl/specs/valid/s2_multicast_source_oriented.json)
 
 ```json
 {
@@ -192,8 +192,8 @@ sudo python -m scenarios.multicast_s2 \
 
 Os resultados experimentais estão disponíveis em:
 
-- 📁 [`results/S1/`](results/S1/)
-- 📁 [`results/S1/`](results/S1/)
+- 📁 [`/results/S1/`](/results/S1/)
+- 📁 [`/results/S1/`](/results/S1/)
 
 Cada execução gera arquivos JSON, CSV e dumps auxiliares utilizados para análise e construção das figuras do artigo.
 
