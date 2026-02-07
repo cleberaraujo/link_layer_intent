@@ -93,6 +93,10 @@ Os resultados completos estão disponíveis em:
 - [`/results/S1/`](/results/S1/)
 - [`/results/S2/`](/results/S2/)
 
+Disponibilizamos também diversos outros resultados. Eles estão disponíveis em:
+- [`/misc/results/`](/misc/results/)
+
+
 As Figuras utilizadas no artigo encontram-se em [`/figures/`](/figures/). Os *scripts* e artefatos utilizados para a construção das Figuras estão em [`figures/construction/`](figures/construction/).
 
 📄 **Há um passo a passo completo para realização dos experimentos** em [`docs/experiments.md`](docs/experiments.md).
@@ -124,7 +128,7 @@ As Figuras utilizadas no artigo encontram-se em [`/figures/`](/figures/). Os *sc
 │   └── results/            # Resultados gerais para validação
 │       ├── S1/             # Amostra de mais resultados obtidos no S1
 │       └── S2/             # Amostra de mais resultados obtidos no S2
-│   └── results/            # Resultados utilizados no artigo
+│   results/                # Resultados utilizados no artigo
 │       ├── S1/             # Resultados obtidos no S1 por modos + backends
 │       └── S2/             # Resultados obtidos no S2 por modos + backends
 |   cli.py
