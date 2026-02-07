@@ -90,8 +90,8 @@ Foram avaliados dois cenários complementares:
 - **S2 – Multicast Orientado à Origem**: avalia estabilidade, recuperação e contenção sob eventos dinâmicos de *join multicast*.
 
 Os resultados completos estão disponíveis em:
-- [`/dsl/results/S1/`](/dsl/results/S1/)
-- [`/dsl/results/S2/`](/dsl/results/S2/)
+- [`/results/S1/`](/results/S1/)
+- [`/results/S2/`](/results/S2/)
 
 As Figuras utilizadas no artigo encontram-se em [`/figures/`](/figures/). Os *scripts* e artefatos utilizados para a construção das Figuras estão em [`figures/construction/`](figures/construction/).
 
