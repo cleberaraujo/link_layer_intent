@@ -1,6 +1,6 @@
 {
   "l2i_version": "0.1",
-  "tenant": "sbrc2026",
+  "tenant": "sbrc.2026",
   "scope": "multidomain-A-B-C",
   "flow_id": "S1_UnicastQoS",
   "requirements": {

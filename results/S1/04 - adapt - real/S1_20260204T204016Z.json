@@ -1,0 +1,100 @@
+{
+  "scenario": "S1_unicast_qos",
+  "flow_id": "S1_UnicastQoS",
+  "timestamp_utc": "20260204T204016Z",
+  "mode": "adapt",
+  "backend_mode": "real",
+  "spec_path": "specs/valid/s1_unicast_qos.json",
+  "spec_exists": true,
+  "environment": {
+    "bwA_mbps": 100.0,
+    "bwB_mbps": 50.0,
+    "bwC_mbps": 100.0,
+    "delay_ms": 1.0,
+    "be_mbps": 60.0
+  },
+  "endpoints": {
+    "flow": {
+      "src": "h1",
+      "dst": "h3",
+      "dst_ip": "10.0.0.3"
+    },
+    "be": {
+      "src": "h1",
+      "dst": "h2",
+      "dst_ip": "10.0.0.2"
+    }
+  },
+  "targets": {
+    "B": {
+      "host": "127.0.0.1",
+      "port": 830,
+      "user": "dev",
+      "password": "***",
+      "timeout": 10
+    },
+    "C": {
+      "address": "127.0.0.1:9559",
+      "device_id": 0,
+      "election_id": [
+        0,
+        100
+      ],
+      "manage_switch": false,
+      "dst_ip": "10.0.0.3"
+    }
+  },
+  "intent": {
+    "rtt_pctl": "P99",
+    "latency_max_ms": 30.0,
+    "bandwidth_min_mbps": 4.0,
+    "bandwidth_max_mbps": 0.0,
+    "priority": "high"
+  },
+  "backend_apply": {
+    "A": true,
+    "B": true,
+    "C": true
+  },
+  "timing": {
+    "t_wall_start_utc": "2026-02-04T20:40:13.270320+00:00",
+    "t_wall_end_utc": "2026-02-04T20:41:28.368381+00:00",
+    "duration_ms": 75098,
+    "control_plane_ms": {
+      "total": 75098.021,
+      "parse_ms": 61.626,
+      "domains": {
+        "A": 250.946,
+        "B": 3246.098,
+        "C": 61.429
+      }
+    }
+  },
+  "artifacts": {
+    "domA_json": "/home/dev/net-dev/dsl/results/S1/S1_20260204T204016Z_dom_A.json",
+    "domB_json": "/home/dev/net-dev/dsl/results/S1/S1_20260204T204016Z_dom_B.json",
+    "domC_json": "/home/dev/net-dev/dsl/results/S1/S1_20260204T204016Z_dom_C.json",
+    "tc_dump_A_txt": "/home/dev/net-dev/dsl/results/S1/S1_20260204T204016Z_tc_dump_A.txt",
+    "netconf_dump_B_txt": "/home/dev/net-dev/dsl/results/S1/S1_20260204T204016Z_netconf_dump_B.txt",
+    "p4_dump_C_txt": "/home/dev/net-dev/dsl/results/S1/S1_20260204T204016Z_p4_dump_C.txt",
+    "preflight_flow": "/home/dev/net-dev/dsl/results/S1/S1_20260204T204016Z_preflight_flow.txt",
+    "preflight_be": "/home/dev/net-dev/dsl/results/S1/S1_20260204T204016Z_preflight_be.txt",
+    "iperf_flow": "/home/dev/net-dev/dsl/results/S1/S1_20260204T204016Z_iperf_flow.json",
+    "iperf_be": "/home/dev/net-dev/dsl/results/S1/S1_20260204T204016Z_iperf_be.json",
+    "rtt_flow_csv": "/home/dev/net-dev/dsl/results/S1/S1_20260204T204016Z_rtt_flow.csv",
+    "summary_json": "/home/dev/net-dev/dsl/results/S1/S1_20260204T204016Z.json"
+  },
+  "metrics": {
+    "rtt_pctl": "P99",
+    "rtt_pctl_ms": 0.2,
+    "rtt_n": 80,
+    "delivery_ratio": 1.0,
+    "flow_throughput_mbps": 0.105,
+    "be_throughput_mbps": 60.01
+  },
+  "conformance": {
+    "latency_ok": true,
+    "bandwidth_ok": false,
+    "intent_ok": false
+  }
+}

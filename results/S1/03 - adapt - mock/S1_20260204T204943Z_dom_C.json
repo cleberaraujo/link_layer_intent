@@ -1,0 +1,38 @@
+{
+  "backend_chain": [
+    "l2i.backends._shim_mock_p4"
+  ],
+  "applied": true,
+  "env_params": {
+    "bwC_mbps": 100.0
+  },
+  "target": null,
+  "readback_dump": "[no_dump]",
+  "responses": [
+    {
+      "backend": "l2i.backends._shim_mock_p4",
+      "applied": true,
+      "response": {
+        "backend": "p4_mock",
+        "planned": {
+          "kind": "p4",
+          "pipeline": "bmv2-mock",
+          "entry_count": 1
+        },
+        "exec": {
+          "simulated": true,
+          "ok": true
+        },
+        "request": {
+          "backend": null,
+          "intent": {
+            "class": "prio10",
+            "min_mbps": 4.0,
+            "max_mbps": 0.0
+          },
+          "priority": "best_effort"
+        }
+      }
+    }
+  ]
+}

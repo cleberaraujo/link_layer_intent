@@ -1,0 +1,54 @@
+{
+  "backend_chain": [
+    "l2i.backends._shim_real_netconf"
+  ],
+  "applied": true,
+  "env_params": {
+    "bwB_mbps": 50.0
+  },
+  "target": {
+    "host": "127.0.0.1",
+    "port": 830,
+    "user": "dev",
+    "password": "***",
+    "timeout": 10
+  },
+  "responses": [
+    {
+      "backend": "l2i.backends._shim_real_netconf",
+      "applied": true,
+      "response": {
+        "domain": {
+          "name": "B"
+        },
+        "intent": {
+          "class": "prio10",
+          "min_mbps": 4.0,
+          "max_mbps": 0.0
+        },
+        "target": {
+          "host": "127.0.0.1",
+          "port": 830,
+          "user": "dev",
+          "password": "***",
+          "timeout": 10
+        },
+        "channel": "netconf",
+        "planned": {
+          "host": "127.0.0.1",
+          "port": 830,
+          "username": "dev",
+          "yang_model": "urn:l2i:qos",
+          "xml_sent": "<config xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n  <qos xmlns=\"urn:l2i:qos\">\n    <class>prio10</class><min-mbps>4</min-mbps><max-mbps>0</max-mbps>\n  </qos>\n</config>"
+        },
+        "exec": {
+          "ok": true,
+          "stdout": "",
+          "stderr": "",
+          "detail": ""
+        },
+        "running_snapshot": "<rpc-reply xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\" message-id=\"urn:uuid:6bc37233-9ebc-43ae-9a71-427ef88d651a\"><data><qos xmlns=\"urn:l2i:qos\"><class>prio10</class><min-mbps>4</min-mbps><max-mbps>0</max-mbps></qos></data></rpc-reply>"
+      }
+    }
+  ]
+}

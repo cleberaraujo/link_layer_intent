@@ -7,7 +7,7 @@ from l2i.synth import synthesize_ir
 #from l2i.emit import emit_netconf, emit_p4runtime_stub
 from l2i.emit import emit_netconf_like, emit_p4runtime_like
 
-# Perfis embutidos (você pode trocar por leitura de JSON externo se preferir)
+# Perfis embutidos
 LEGACY_PROFILE = {
   "profile_id":"legacy-vlan-tc",
   "queues":{"max_queues":4,"modes":{"strict":True,"wfq":{"supported":True,"weights_min":0.5,"weights_max":16}}},

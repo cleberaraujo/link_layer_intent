@@ -1,6 +1,14 @@
-# L2i: Adaptação Dinâmica na Camada de Enlace via Linguagem Declarativa
+# Uma Abordagem Declarativa e Modular para Adaptação Dinâmica da Camada de Enlace de Redes Heterogêneas
 
-**L2i** é um framework de pesquisa para **adaptação dinâmica na camada de enlace (L2)**, baseado em uma **linguagem declarativa independente de tecnologia**, projetado para operar em **ambientes heterogêneos e multidomínio**.
+Este repositório contém os **artefatos mínimos** que sustentam as evidências experimentais apresentadas no artigo **“Uma Abordagem Declarativa e Modular para Adaptação Dinâmica da Camada de Enlace de Redes Heterogêneas”**, bem como permite sua **replicação conceitual**.
+
+> ⚠️ **Nota (Ciência Aberta / proteção de implementação):** este repositório foi organizado para permitir **comprovação** e **replicação conceitual** dos experimentos (topologias, especificações, comandos, e saídas), sem expor a totalidade dos componentes internos (ex.: implementação completa de L2i e backends). Os artefatos completos podem ser disponibilizados após a avaliação ou mediante solicitação aos autores.
+
+---
+
+## 🧩 Adaptação Dinâmica na Camada de Enlace via Linguagem Declarativa
+
+A proposta se baseia na criação de um *framework* para **adaptação dinâmica na camada de enlace (L2)**, baseado em uma **linguagem declarativa independente de tecnologia**, projetado para operar em **ambientes heterogêneos e multidomínio**.
 
 O projeto investiga como requisitos de comunicação — como **largura de banda, latência, prioridade e multicast orientado à origem** — podem ser expressos de forma abstrata e **materializados dinamicamente** sobre diferentes tecnologias de L2, incluindo:
 
@@ -21,7 +29,7 @@ Apesar dos avanços em SDN, P4 e hardware programável, a camada de enlace ainda
 - Pouca integração com arquiteturas **intent-based**;
 - Dificuldade de evolução incremental em ambientes reais.
 
-O **L2i** ataca esse problema propondo uma **camada declarativa própria para L2**, capaz de:
+A proposta ataca esse problema propondo uma **camada declarativa própria para L2**, capaz de:
 
 - Desacoplar *o que* deve ser garantido de *como* isso é implementado;
 - Operar simultaneamente sobre tecnologias legadas e programáveis;
@@ -87,21 +95,68 @@ As métricas analisadas incluem:
 - Tempo de convergência,
 - Overhead multicast.
 
-📄 **Passo a passo completo** em [`docs/experiments.md`](docs/experiments.md).
+Foram avaliados dois cenários complementares:
+- **S1 – Unicast Multidomínio**: valida a aderência semântica da intenção sob tráfego concorrente;
+- **S2 – Multicast Orientado à Origem**: avalia estabilidade, recuperação e contenção sob eventos dinâmicos de *join multicast*.
+
+Os resultados completos estão disponíveis em:
+- `dsl/results/S1/`
+- `dsl/results/S2/`
+
+As figuras utilizadas no artigo encontram-se em `figures/`. Os scripts e artefatos para a construção das figuras estão em `figures/construction/`.
+
+📄 **Passo a passo completo para realização dos experimentos** em [`docs/experiments.md`](docs/experiments.md).
 
 ---
 
-## 📁 Estrutura do Repositório
+## 📁 Estrutura do Repositório (visão geral)
 
-```text
-net-dev/
-├── dsl/                # Núcleo da L2i e do framework
-│   ├── l2i/             # Gramática, validação, modelos e execução
-│   ├── schemas/         # JSON Schemas da linguagem
-│   ├── specs/           # Especificações válidas e inválidas
-│   ├── profiles/        # Perfis de domínio (tc, netconf, p4)
-│   ├── scenarios/       # S1, S2 e cenários multidomínio
-│   ├── scripts/         # Execução, comparação e plots
-│   └── tools/           # Utilitários auxiliares
-├── venv/               # Ambiente virtual Python
-└── docs/               # Documentação científica
+```
+├── README.md
+├── docs/
+│   ├── architecture.md
+│   ├── experiments.md
+│   └── devs.md
+├── dsl/                    # Núcleo da L2i e do framework
+│   ├── p4src/              # P4 mininal (inicialização)
+│   ├── profiles/           # Configuração de domínios e tecnologias
+│   ├── results/            # Local de saída dos resultados
+│   ├── schemas/            # JSON Schemas da linguagem
+│   ├── scripts/            # Execução, comparação e plots
+│   ├── specs/            
+│   │   ├──  invalid/       # Especificações inválidas (teste L2i)
+│   │   └── valid/          # Especificações válidas (utilizadas)
+│   └── tools/              # Compatilidade de specs
+├── figures/                # Figuras utilizadas no artigo
+│   └── construction/       # Como as Figuras foram criadas (dados + plots)
+├── misc/
+│   ├── plots/              # Plots gerais
+│   └── results/            # Resultados gerais para validação
+│       ├── S1/             # Amostra de mais resultados obtidos no S1
+│       └── S2/             # Amostra de mais resultados obtidos no S2
+│   └── results/            # Resultados utilizados no artigo
+│       ├── S1/             # Resultados obtidos no S1 por modos + backends
+│       └── S2/             # Resultados obtidos no S2 por modos + backends
+|   cli.py
+└── l2i-nacm-dev-permit.xml
+```
+
+---
+
+## 📌 Observações Importantes
+
+- Este repositório **não contém** a implementação completa da linguagem L2i nem dos backends.
+- A versão completa dos artefatos com todos os códigos poderá ser disponibilizada **após a avaliação** ou **mediante solicitação aos autores**.
+
+---
+
+## 🔗 Próximos Passos
+
+Consulte:
+- 📐 [`docs/architecture.md`](docs/architecture.md) para a visão arquitetural
+- 🧪 [`docs/experiments.md`](docs/experiments.md) para reproduzir conceitualmente os cenários
+- 👩‍💻 [`docs/devs.md`](docs/devs.md) para notas técnicas adicionais
+
+---
+
+📄 *Este repositório acompanha o artigo submetido ao SBRC e destina-se exclusivamente a fins de avaliação científica.*

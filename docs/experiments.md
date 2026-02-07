@@ -8,7 +8,7 @@ O objetivo é garantir **transparência experimental total e reprodutibilidade**
 
 ## 1. Dimensões Experimentais
 
-A avaliação do L2i é estruturada ao longo de **dois eixos experimentais ortogonais**.
+A avaliação da proposta é estruturada ao longo de **dois eixos experimentais ortogonais**.
 
 ### 1.1 Comportamento do Plano de Controle
 
@@ -29,6 +29,16 @@ Isso resulta em quatro modos experimentais:
 | adapt + mock | Adaptativo | Emulado | Validação da DSL |
 | adapt + real | Adaptativo | Real | Avaliação fim a fim |
 
+Os experimentos foram executados em um **testbed real/emulado**, construído com:
+
+- *Linux network namespaces*
+- Controle de tráfego (`tc`)
+- Ferramentas de medição (`iperf`, `ping`)
+- (Quando aplicável) switches programáveis via P4
+
+❗ **Não utilizamos Mininet**. A topologia é criada diretamente via scripts e namespaces.
+
+
 ---
 
 ## 2. Visão Geral dos Cenários
@@ -47,11 +57,6 @@ Avaliar como o L2i adapta fluxos unicast em múltiplos domínios de L2 sob condi
   - Latência máxima
   - Nível de prioridade
 
-**Arquivos relevantes:**
-
-- `dsl/scenarios/multidomain_s1.py`
-- `dsl/specs/valid/s1_unicast_qos.json`
-
 ---
 
 ### 2.2 Cenário S2 — Multicast Orientado à Origem
@@ -65,77 +70,133 @@ Avaliar a capacidade do L2i de gerenciar árvores multicast dinamicamente com ba
 - Restrições de QoS específicas por receptor
 - Replicação seletiva e poda dinâmica
 
-**Arquivos relevantes:**
+---
 
-- `dsl/scenarios/multicast_s2.py`
-- `dsl/specs/valid/s2_multicast_source_oriented.json`
+### 2.3 📐 Topologias
+
+As topologias dos cenários S1 e S2 estão ilustradas em:
+
+📄 `figures/topologias_cenarios.pdf`
+
+A criação das topologias é feita por scripts específicos:
+
+- **Cenário S1**: `dsl/scripts/s1_topology_setup.sh`
+- **Cenário S2**: `dsl/scripts/s2_topology_setup.sh`
 
 ---
 
-## 3. Parâmetros Experimentais
+### 2.4 📄 Especificações Declarativas
 
-### 3.1 Parâmetros Comuns
+### Cenário S1 – Unicast com QoS
 
-| Parâmetro | Descrição | Padrão |
-|-----------|------------|--------|
-| `--spec` | Caminho para a especificação L2i (JSON) | obrigatório |
-| `--duration` | Duração do experimento (segundos) | 60 |
-| `--mode` | `baseline` ou `adapt` | baseline |
-| `--backend` | `mock` ou `real` | mock |
-| `--retries` | Número de tentativas na configuração | 3 |
-| `--pause` | Intervalo entre execuções (s) | 2 |
+Arquivo: `dsl/specs/valid/s1_unicast_qos.json`
 
----
-
-### 3.2 Parâmetros de Tráfego
-
-| Parâmetro | Descrição | Valores típicos |
-|-----------|------------|----------------|
-| `--bwA` | Largura de banda do fluxo A | 3–6 Mbps |
-| `--bwB` | Largura de banda do fluxo B | 3–5 Mbps |
-| `--bwC` | Largura de banda do fluxo C | 2–4 Mbps |
-| `--be-mbps` | Agregado de melhor esforço | 5–8 Mbps |
-| `--delay-ms` | Atraso do enlace | 5–20 ms |
-
-Esses parâmetros são propositalmente configuráveis para explorar:
-
-- limiares de saturação,
-- sensibilidade ao congestionamento,
-- estabilidade das decisões de adaptação.
-
----
-
-## 4. Modos de Execução e Exemplos
-
-### 4.1 Baseline + Mock
-
-```bash
-python3 dsl/cli.py \
-  --scenario s1 \
-  --spec dsl/specs/valid/s1_unicast_qos.json \
-  --mode baseline \
-  --backend mock \
-  --duration 60
+```json
+{
+  "l2i_version": "0.1",
+  "tenant": "sbrc.2026",
+  "scope": "multidomain-A-B-C",
+  "flow": { "id": "S1_UnicastQoS" },
+  "requirements": {
+    "latency": { "max_ms": 30, "percentile": "P99" },
+    "bandwidth": { "min_mbps": 4, "max_mbps": 7 },
+    "priority": { "level": "high" },
+    "multicast": { "enabled": false }
+  }
+}
 ```
 
-Esse modo fornece uma referência lógica, sem aplicação real de mecanismos de L2, sendo útil para validação funcional e comparação conceitual.
+---
+
+### Cenário S2 – Multicast Orientado à Origem
+
+Arquivo: `dsl/specs/valid/s2_multicast_source_oriented.json`
+
+```json
+{
+  "flow_id": "S2_SourceOrientedMulticast",
+  "endpoints": {
+    "source": {"domain": "A", "host": "h1"},
+    "receivers": [
+      {"domain": "B", "host": "h3"},
+      {"domain": "C", "host": "h4"}
+    ]
+  },
+  "multicast": {
+    "enabled": true,
+    "group": "G1",
+    "tree": "SPT"
+  },
+  "bandwidth": {
+    "min_mbps": 2,
+    "max_mbps": 5
+  },
+  "priority": "medium",
+  "latency": {
+    "max_ms": 40,
+    "percentile": "P99"
+  }
+}
+```
+---
+
+## ▶️ 3. Execução dos Experimentos
+
+### Cenário S1
+
+```bash
+sudo python -m scenarios.multidomain_s1 \
+  --spec specs/valid/s1_unicast_qos.json \
+  --duration 30 \
+  --bwA 100 --bwB 50 --bwC 100 \
+  --delay-ms 1 \
+  --be-mbps 60 \
+  --mode {baseline|adapt} \
+  --backend {mock|real}
+```
+
+**Parâmetros principais**:
+- `bwA/bwB/bwC`: capacidades dos domínios
+- `be-mbps`: tráfego concorrente de melhor esforço
+- `mode`: execução sem (`baseline`) ou com adaptação (`adapt`)
 
 ---
 
-## 5. Considerações sobre Reprodutibilidade
+### Cenário S2
 
-Para garantir a reprodutibilidade dos resultados:
-
-- todos os parâmetros relevantes são explicitamente configuráveis,
-- os cenários são executados de forma determinística sempre que possível,
-- o código-fonte, especificações e scripts são versionados no repositório,
-- modos *mock* e *real* permitem separar lógica de execução e efeitos de implementação.
-
-Essa abordagem assegura que os resultados obtidos possam ser verificados, comparados e estendidos por outros pesquisadores.
+```bash
+sudo python -m scenarios.multicast_s2 \
+  --spec specs/valid/s2_multicast_source_oriented.json \
+  --duration 30 \
+  --be-mbps 80 \
+  --bwA 40 --bwB 100 --bwC 100 \
+  --delay-ms 1 \
+  --mode {baseline|adapt} \
+  --backend {mock|real} \
+  --phase-splits 10 15 \
+  --event-name join \
+  --rtt-interval-ms 50 \
+  --recovery-bin-ms 500 \
+  --stable-k-bins 3
+```
+**Parâmetros adicionais (S2)**:
+- `phase-splits`: define janelas (em segundos) para delimitar fases pre-event (0–10s), join (10–15s), post-event (15–30s)
+- `event-name`: nome do evento dinâmico (ex.: join).
+- `rtt-interval-ms`: periodicidade de amostragem de RTT (ms).
+- `recovery-bin-ms`: granularidade das janelas para série temporal de recuperação (ms).
+- `stable-k-bins`: define como conformidade estável como K janelas consecutivas em conformidade
 
 ---
 
-## 6. Síntese
+## 📊 4. Resultados
 
-A metodologia experimental do L2i foi concebida para equilibrar **rigor científico**, **flexibilidade experimental** e **viabilidade prática**. Ao combinar múltiplos cenários, modos de execução e níveis de realismo, o framework oferece uma base sólida para avaliação comparativa e para a exploração de novas abordagens de adaptação na camada de enlace.
+Os resultados experimentais estão disponíveis em:
 
+- 📁 `dsl/results/S1/`
+- 📁 `dsl/results/S2/`
+
+Cada execução gera arquivos JSON, CSV e dumps auxiliares utilizados para análise e construção das figuras do artigo.
+
+---
+
+📌 *Este documento descreve os experimentos no nível necessário para compreensão metodológica e avaliação científica.*
