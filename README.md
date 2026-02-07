@@ -95,6 +95,7 @@ Os resultados completos estão disponíveis em:
 
 Disponibilizamos também diversos outros resultados. Eles estão disponíveis em:
 - [`/misc/results/`](/misc/results/)
+- [`/misc/plots/`](/misc/plots/)
 
 
 As Figuras utilizadas no artigo encontram-se em [`/figures/`](/figures/). Os *scripts* e artefatos utilizados para a construção das Figuras estão em [`figures/construction/`](figures/construction/).
