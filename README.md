@@ -1,15 +1,5 @@
 # Uma Abordagem Declarativa e Modular para Adaptação Dinâmica da Camada de Enlace de Redes Heterogêneas
 
-Este repositório contém os **artefatos mínimos** que sustentam as evidências experimentais apresentadas no artigo **“Uma Abordagem Declarativa e Modular para Adaptação Dinâmica da Camada de Enlace de Redes Heterogêneas”**, bem como permite sua **replicação conceitual**.
-
-> ⚠️ **Nota (Ciência Aberta / proteção de implementação):** este repositório foi organizado para permitir **comprovação** e **replicação conceitual** dos experimentos (topologias, especificações, comandos, e saídas), sem expor a totalidade dos componentes internos (ex.: implementação completa de L2i e backends). Os artefatos completos podem ser disponibilizados após a avaliação ou mediante solicitação aos autores.
-
----
-
-## 🧩 Adaptação Dinâmica na Camada de Enlace via Linguagem Declarativa
-
-A proposta se baseia na criação de um *framework* para **adaptação dinâmica na camada de enlace (L2)**, baseado em uma **linguagem declarativa independente de tecnologia**, projetado para operar em **ambientes heterogêneos e multidomínio**.
-
 O projeto investiga como requisitos de comunicação — como **largura de banda, latência, prioridade e multicast orientado à origem** — podem ser expressos de forma abstrata e **materializados dinamicamente** sobre diferentes tecnologias de L2, incluindo:
 
 - Linux Traffic Control (tc / HTB),
