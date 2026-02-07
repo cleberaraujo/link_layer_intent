@@ -6,7 +6,7 @@ Este documento reúne observações úteis para revisores e desenvolvedores inte
 
 ---
 
-## 🧪 Natureza do Testbed
+## 🧪 Natureza do testbed
 
 - Os experimentos utilizam **recursos reais do sistema operacional** (Linux)
 - A topologia é construída dinamicamente com *network namespaces*
@@ -15,7 +15,7 @@ Este documento reúne observações úteis para revisores e desenvolvedores inte
 
 ---
 
-## 📈 Métricas e Conformidade
+## 📈 Métricas e conformidade
 
 Os experimentos avaliam:
 
@@ -27,7 +27,7 @@ Os experimentos avaliam:
 
 ---
 
-## 🗂️ Artefatos Gerados
+## 🗂️ Artefatos gerados
 
 Cada execução gera:
 
@@ -44,7 +44,7 @@ Esses artefatos são suficientes para:
 
 ---
 
-## 🔒 Código Completo Não Incluído
+## 🔒 Código completo não incluído
 
 Nesta versão pública:
 
@@ -52,5 +52,7 @@ Nesta versão pública:
 
 📩 O acesso pode ser concedido **após a avaliação** ou **mediante solicitação aos seus autores**.
 
+
 ---
+
 📌 *Estas notas visam apoiar a leitura crítica do artigo e a avaliação dos resultados apresentados.*

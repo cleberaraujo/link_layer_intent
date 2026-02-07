@@ -1,8 +1,8 @@
 # Arquitetura — Framework de Adaptação Dinâmica em L2 (CED/L2i)
   
-## 1. Visão Geral da Arquitetura
+## 1. Visão geral da arquitetura
 
-O framework implementa uma **camada de adaptação declarativa e orientada a intenções para a camada de enlace (L2)**, projetada para operar em ambientes heterogêneos e multidomínio. Seu objetivo principal é desacoplar **os requisitos de comunicação expressos pelas camadas superiores** dos **mecanismos específicos de tecnologia** utilizados para aplicá-los em L2.
+O *framework* implementa uma **camada de adaptação declarativa e orientada a intenções para a camada de enlace (L2)**, projetada para operar em ambientes heterogêneos e multidomínio. Seu objetivo principal é desacoplar **os requisitos de comunicação expressos pelas camadas superiores** dos **mecanismos específicos de tecnologia** utilizados para aplicá-los em L2.
 
 O elemento central é a linguagem **L2i (Layer‑2 Intent)**, utilizada para declarar *intenções de comunicação* sem impor como essas intenções devem ser implementadas.
 
@@ -23,9 +23,9 @@ A arquitetura evita explicitamente expor detalhes de configuração de baixo ní
 
 ---
 
-## 2. Arquitetura em Camadas
+## 2. Arquitetura em camadas
 
-Conceitualmente, o framework é posicionado **entre L2 e L3**, atuando como um estrato de adaptação que estende as funcionalidades tradicionais da camada de enlace sem modificar as pilhas de protocolos existentes.
+Conceitualmente, o *framework* está posicionado **entre L2 e L3**, atuando como um estrato de adaptação que estende as funcionalidades tradicionais da camada de enlace sem modificar as pilhas de protocolos existentes.
 
 ```
 +-------------------------------+
@@ -59,7 +59,7 @@ Essa posição permite ao L2i:
 
 ---
 
-## 3. Componentes Arquiteturais Principais
+## 3. Componentes arquiteturais principais
 
 A arquitetura é decomposta em três componentes centrais:
 
@@ -73,7 +73,7 @@ O L2i é a **materialização concreta da CED**, enquanto MAD e AC fornecem o pi
 
 ## 4. Camada de Especificações Declarativas (CED)
 
-### 4.1 Papel e Fundamentação
+### 4.1 Papel e fundamentação
 
 A CED define a **interface semântica** entre as camadas superiores e a camada de enlace. Sua responsabilidade é expressar a _intenção de comunicação_, e não procedimentos de configuração.
 
@@ -85,7 +85,7 @@ Em vez de especificar _como_ configurar mecanismos de L2, a CED permite declarar
 - semânticas de multicast (incluindo árvores orientadas à origem),
 - escopo de aplicabilidade.
 
-### 4.2 L2i como Materialização da CED
+### 4.2 L2i como materialização da CED
 
 O L2i é a **linguagem declarativa específica de domínio** que implementa a CED.
 
@@ -99,15 +99,15 @@ Principais propriedades de projeto do L2i:
 
 ---
 
-## 5. Arquitetura Interna do L2i
+## 5. Arquitetura interna da L2i
 
-Internamente, o L2i é estruturado como um pipeline de estágios de processamento semântico.
+Internamente, a L2i é estruturada como um *pipeline* de estágios de processamento semântico.
 
 Especificações inválidas são rejeitadas **antes** de qualquer ação na rede.
 
 ---
 
-### 5.1 Modelagem de Capacidades
+### 5.1 Modelagem de capacidades
 
 Cada domínio de execução expõe um **perfil de capacidades** descrevendo o que ele é capaz de aplicar.
 
@@ -119,13 +119,13 @@ Exemplos:
 
 As capacidades são descritas por meio de:
 
-- `dsl/profiles/*.json`
+- [`/dsl/profiles/`](/dsl/profiles/*.json)
 
-Isso permite ao framework "raciocinar" sobre **o que é viável** em cada domínio.
+Isso permite ao *framework* "raciocinar" sobre **o que é viável** em cada domínio.
 
 ---
 
-### 5.2 Composição e Decomposição de Intenções
+### 5.2 Composição e decomposição de intenções
 
 Quando uma especificação abrange múltiplos domínios, o L2i:
 
@@ -161,7 +161,7 @@ O AC é a **camada de execução orientada à tecnologia**.
 
 Ele aplica ações concretas por meio de adaptadores específicos de backend.
 
-### 7.1 Abstração de Backends
+### 7.1 Abstração de *backends*
 
 Os típicos incluem:
 
@@ -185,17 +185,17 @@ O AC garante que:
 
 ---
 
-## 8. Arquitetura Orientada a Multicast
+## 8. Arquitetura orientada a *Multicast*
 
 O L2i inclui suporte nativo a **multicast orientado à origem em L2**.
 
 Destaques arquiteturais:
 
-- multicast é tratado como uma intenção de primeira classe,
+- *multicast* é tratado como uma intenção de primeira classe,
 - dinâmicas de join/leave são tratadas explicitamente,
 - replicação é seletiva e orientada a capacidades.
 
-Isso viabiliza experimentação além do IGMP snooping tradicional, incluindo:
+Isso viabiliza experimentação além do *IGMP snooping* tradicional, incluindo:
 
 - árvores definidas pela origem,
 - replicação sensível a prioridades,
@@ -219,7 +219,7 @@ Essa dualidade é fundamental para validação científica e reprodutibilidade.
 
 ---
 
-## 10. Garantias Arquiteturais
+## 10. Garantias arquiteturais
 
 A arquitetura garante:
 
@@ -231,7 +231,7 @@ A arquitetura garante:
 
 ---
 
-## 11. Escopo e Limitações Arquiteturais
+## 11. Escopo e limitações arquiteturais
 
 Escopo atual:
 

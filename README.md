@@ -27,7 +27,7 @@ A proposta ataca esse problema propondo uma **camada declarativa própria para L
 
 ---
 
-## 🧠 Ideia Central
+## 🧠 Ideia central
 
 > **Aplicações e protocolos expressam intenções de comunicação;  
 > a rede adapta dinamicamente a camada de enlace para satisfazê-las.**
@@ -40,7 +40,7 @@ Essa ideia se concretiza por meio de:
 
 ---
 
-## 🧩 Arquitetura (Visão Geral)
+## 🧩 Arquitetura (visão geral)
 
 O framework é organizado em três blocos principais:
 
@@ -59,7 +59,7 @@ A L2i **não substitui** SDN, P4 ou NETCONF — ela **os complementa**, atuando 
 
 ---
 
-## 🧪 Avaliação Experimental
+## 🧪 Avaliação experimental
 
 O repositório contém **experimentos reais e reproduzíveis**, organizados em dois cenários principais:
 
@@ -90,16 +90,16 @@ Foram avaliados dois cenários complementares:
 - **S2 – Multicast Orientado à Origem**: avalia estabilidade, recuperação e contenção sob eventos dinâmicos de *join multicast*.
 
 Os resultados completos estão disponíveis em:
-- `dsl/results/S1/`
-- `dsl/results/S2/`
+- [`/dsl/results/S1/`](/dsl/results/S1/)
+- [`/dsl/results/S2/`](/dsl/results/S2/)
 
-As figuras utilizadas no artigo encontram-se em `figures/`. Os scripts e artefatos para a construção das figuras estão em `figures/construction/`.
+As Figuras utilizadas no artigo encontram-se em [`/figures/`](/figures/). Os *scripts* e artefatos utilizados para a construção das Figuras estão em [`figures/construction/`](figures/construction/).
 
-📄 **Passo a passo completo para realização dos experimentos** em [`docs/experiments.md`](docs/experiments.md).
+📄 **Há um passo a passo completo para realização dos experimentos** em [`docs/experiments.md`](docs/experiments.md).
 
 ---
 
-## 📁 Estrutura do Repositório (visão geral)
+## 📁 Estrutura do repositório (visão geral)
 
 ```
 ├── README.md
@@ -133,14 +133,14 @@ As figuras utilizadas no artigo encontram-se em `figures/`. Os scripts e artefat
 
 ---
 
-## 📌 Observações Importantes
+## 📌 Observações importantes
 
 - Este repositório **não contém** a implementação completa da linguagem L2i nem dos backends.
 - A versão completa dos artefatos com todos os códigos poderá ser disponibilizada **após a avaliação** ou **mediante solicitação aos autores**.
 
 ---
 
-## 🔗 Próximos Passos
+## 🔗 Próximos passos
 
 Consulte:
 - 📐 [`docs/architecture.md`](docs/architecture.md) para a visão arquitetural

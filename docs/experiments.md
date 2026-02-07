@@ -6,19 +6,22 @@ O objetivo é garantir **transparência experimental total e reprodutibilidade**
 
 ---
 
-## 1. Dimensões Experimentais
+## 1. Dimensões experimentais
 
 A avaliação da proposta é estruturada ao longo de **dois eixos experimentais ortogonais**.
 
-### 1.1 Comportamento do Plano de Controle
+
+### 1.1 Comportamento do plano de controle
 
 - **baseline**: comportamento tradicional de L2, sem adaptação declarativa.
 - **adapt**: L2i habilitado, com especificações declarativas conduzindo a adaptação dinâmica.
 
-### 1.2 Realismo do Backend
 
-- **mock**: backends emulados (execução lógica, sem aplicação no kernel ou plano de dados).
+### 1.2 Realismo do *backend*
+
+- **mock**: *backends* emulados (execução lógica, sem aplicação no kernel ou plano de dados).
 - **real**: aplicação efetiva usando Linux `tc/HTB`, NETCONF/sysrepo ou P4/bmv2.
+
 
 Isso resulta em quatro modos experimentais:
 
@@ -41,7 +44,8 @@ Os experimentos foram executados em um **testbed real/emulado**, construído com
 
 ---
 
-## 2. Visão Geral dos Cenários
+## 2. Visão geral dos cenários
+
 
 ### 2.1 Cenário S1 — Unicast Multidomínio com Restrições de QoS
 
@@ -57,7 +61,9 @@ Avaliar como o L2i adapta fluxos unicast em múltiplos domínios de L2 sob condi
   - Latência máxima
   - Nível de prioridade
 
+  
 ---
+
 
 ### 2.2 Cenário S2 — Multicast Orientado à Origem
 
@@ -70,7 +76,9 @@ Avaliar a capacidade do L2i de gerenciar árvores multicast dinamicamente com ba
 - Restrições de QoS específicas por receptor
 - Replicação seletiva e poda dinâmica
 
+
 ---
+
 
 ### 2.3 📐 Topologias
 
@@ -83,7 +91,9 @@ A criação das topologias é feita por scripts específicos:
 - **Cenário S1**: [`/dsl/scripts/s1_topology_setup.sh`](/dsl/scripts/s1_topology_setup.sh)
 - **Cenário S2**: [`/dsl/scripts/s2_topology_setup.sh`](/dsl/scripts/s2_topology_setup.sh)
 
+
 ---
+
 
 ### 2.4 📄 Especificações Declarativas
 
@@ -140,7 +150,7 @@ Arquivo: [`/dsl/specs/valid/s2_multicast_source_oriented.json`](/dsl/specs/valid
 ```
 ---
 
-## ▶️ 3. Execução dos Experimentos
+## ▶️ 3. Execução dos experimentos
 
 ### Cenário S1
 
