@@ -44,7 +44,7 @@ Esses artefatos são suficientes para:
 
 ---
 
-## 🔒 Código Não Incluído
+## 🔒 Código Completo Não Incluído
 
 Nesta versão pública:
 
