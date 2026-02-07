@@ -48,10 +48,9 @@ Esses artefatos são suficientes para:
 
 Nesta versão pública:
 
-- A implementação completa da linguagem L2i não está disponível
-- Os backends reais são omitidos
+- A implementação completa da linguagem L2i não está disponível.
 
-📩 O acesso pode ser concedido **após a avaliação** ou **mediante solicitação**.
+📩 O acesso pode ser concedido **após a avaliação** ou **mediante solicitação aos seus autores**.
 
 ---
 📌 *Estas notas visam apoiar a leitura crítica do artigo e a avaliação dos resultados apresentados.*
