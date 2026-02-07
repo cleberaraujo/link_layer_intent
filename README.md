@@ -12,7 +12,7 @@ A proposta foi concebida e avaliada como **pesquisa experimental rigorosa**, com
 
 ## 🎯 Motivação
 
-Apesar dos avanços em SDN, P4 e hardware programável, a camada de enlace ainda apresenta:
+Apesar dos avanços em SDN, P4 e *hardware* programável, a camada de enlace ainda apresenta:
 
 - Forte **acoplamento tecnológico**;
 - Configuração **imperativa e de baixo nível**;

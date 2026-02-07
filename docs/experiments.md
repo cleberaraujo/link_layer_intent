@@ -192,8 +192,8 @@ sudo python -m scenarios.multicast_s2 \
 
 Os resultados experimentais estão disponíveis em:
 
-- 📁 `dsl/results/S1/`
-- 📁 `dsl/results/S2/`
+- 📁 `results/S1/`
+- 📁 `results/S2/`
 
 Cada execução gera arquivos JSON, CSV e dumps auxiliares utilizados para análise e construção das figuras do artigo.
 

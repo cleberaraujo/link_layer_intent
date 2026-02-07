@@ -165,10 +165,10 @@ Ele aplica ações concretas por meio de adaptadores específicos de backend.
 
 Os típicos incluem:
 
-- `tc_htb.py` (Linux tc/HTB),
-- `netconf.py` (sysrepo/Netopeer2),
-- `p4runtime.py` (bmv2 + P4Runtime),
-- `mock.py` (execução instrumentada sem aplicação real).
+- Linux tc/HTB,
+- sysrepo/Netopeer2),
+- bmv2 + P4Runtime,
+- execução instrumentada sem aplicação real (mock).
 
 Essa abstração garante que **a adição de uma nova tecnologia de L2 não afete a CED ou o MAD**.
 
@@ -182,10 +182,6 @@ O AC garante que:
 - falhas parciais sejam detectáveis,
 - o estado possa ser inspecionado ou revertido,
 - a aplicação respeite as prioridades declaradas.
-
-O suporte a telemetria é fornecido por:
-
-- `ac5_telemetry.py`
 
 ---
 
