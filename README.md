@@ -129,11 +129,9 @@ As Figuras utilizadas no artigo encontram-se em [`/figures/`](/figures/). Os *sc
 │   └── results/            # Resultados gerais para validação
 │       ├── S1/             # Amostra de mais resultados obtidos no S1
 │       └── S2/             # Amostra de mais resultados obtidos no S2
-├── results/                # Resultados utilizados no artigo
-│       ├── S1/             # Resultados obtidos no S1 por modos + backends
-│       └── S2/             # Resultados obtidos no S2 por modos + backends
-|   cli.py
-└── l2i-nacm-dev-permit.xml
+└── results/                # Resultados utilizados no artigo
+        ├── S1/             # Resultados obtidos no S1 por modos + backends
+        └── S2/             # Resultados obtidos no S2 por modos + backends
 ```
 
 ---
