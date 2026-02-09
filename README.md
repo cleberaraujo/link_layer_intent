@@ -1,10 +1,15 @@
-# Uma Abordagem Declarativa e Modular para Adaptação Dinâmica da Camada de Enlace de Redes Heterogêneas
+# 🧩 Uma Abordagem Declarativa e Modular para Adaptação Dinâmica da Camada de Enlace de Redes Heterogêneas
+
+🌎 **Navegação**  
+📐 [Arquitetura](/docs/architecture.md) · 🧪 [Experimentos](/docs/experiments.md) · 👩‍💻 [Notas Técnicas](/docs/devs.md) · 📃 [Resultados no artigo](/results/) · 📊 [Figuras no artigo](/figures/) · 📋 [Mais resultados](/misc/results/) · 📈 [Mais figuras](/misc/plots/)
+
+---
 
 O projeto investiga como requisitos de comunicação — como **largura de banda, latência, prioridade e multicast orientado à origem** — podem ser expressos de forma abstrata e **materializados dinamicamente** sobre diferentes tecnologias de L2, incluindo:
 
-- Linux Traffic Control (tc / HTB),
-- NETCONF/YANG (sysrepo + Netopeer2),
-- Data planes programáveis (P4 / bmv2 / P4Runtime).
+- Linux Traffic Control (tc / HTB)
+- NETCONF/YANG (sysrepo + Netopeer2)
+- Data planes programáveis (P4 / bmv2 / *P4Runtime*)
 
 A proposta foi concebida e avaliada como **pesquisa experimental rigorosa**, com foco em **reprodutibilidade**, **comparação baseline vs. adapt**, e **validação real (mock e real)**.
 
@@ -12,18 +17,18 @@ A proposta foi concebida e avaliada como **pesquisa experimental rigorosa**, com
 
 ## 🎯 Motivação
 
-Apesar dos avanços em SDN, P4 e *hardware* programável, a camada de enlace ainda apresenta:
+Apesar dos avanços em SDN, P4 e hardware programável, a camada de enlace ainda apresenta:
 
-- Forte **acoplamento tecnológico**;
-- Configuração **imperativa e de baixo nível**;
-- Pouca integração com arquiteturas **intent-based**;
-- Dificuldade de evolução incremental em ambientes reais.
+- Forte **acoplamento tecnológico**
+- Configuração **imperativa e de baixo nível**
+- Pouca integração com arquiteturas **intent-based**
+- Dificuldade de evolução incremental em ambientes reais
 
 A proposta ataca esse problema propondo uma **camada declarativa própria para L2**, capaz de:
 
-- Desacoplar *o que* deve ser garantido de *como* isso é implementado;
-- Operar simultaneamente sobre tecnologias legadas e programáveis;
-- Preservar a intenção original mesmo em cenários multidomínio.
+- Desacoplar *o que* deve ser garantido de *como* isso é implementado
+- Operar simultaneamente sobre tecnologias legadas e programáveis
+- Preservar a intenção original mesmo em cenários multidomínio
 
 ---
 
@@ -55,7 +60,7 @@ O framework é organizado em três blocos principais:
 
 A L2i **não substitui** SDN, P4 ou NETCONF — ela **os complementa**, atuando como camada semântica intermediária.
 
-📄 **Detalhes completos** estão em [`docs/architecture.md`](docs/architecture.md).
+📄 **Detalhes completos** estão em [`docs/architecture.md`](/docs/architecture.md).
 
 ---
 
@@ -63,33 +68,33 @@ A L2i **não substitui** SDN, P4 ou NETCONF — ela **os complementa**, atuando 
 
 O repositório contém **experimentos reais e reproduzíveis**, organizados em dois cenários principais:
 
-- **S1 — Unicast sensível a QoS em ambiente multidomínio**
-- **S2 — Multicast orientado à origem na camada de enlace**
+- **S1 — *Unicast* sensível a QoS em ambiente multidomínio**
+- **S2 — *Multicast* orientado à origem na camada de enlace**
 
 Cada cenário é avaliado sob quatro combinações:
 
-| Modo       | Backend | Descrição |
+| Modo       | *Backend* | Descrição |
 |------------|---------|-----------|
-| baseline   | mock    | Sem adaptação, execução simulada |
-| baseline   | real    | Sem adaptação, execução real |
-| adapt      | mock    | Com L2i, execução simulada |
-| adapt      | real    | Com L2i, execução real |
+| *baseline*   | *mock*    | Sem adaptação, execução simulada |
+| *baseline*   | *real*    | Sem adaptação, execução real |
+| *adapt*      | *mock*    | Com L2i, execução simulada |
+| *adapt*      | *real*    | Com L2i, execução real |
 
 As métricas analisadas incluem:
 
 - Latência média e p99,
 - RTT,
-- Throughput,
-- Jitter,
+- *Throughput*,
+- *Jitter*,
 - Perda de pacotes,
 - Tempo de convergência,
-- Overhead multicast.
+- *Overhead multicast*.
 
 Foram avaliados dois cenários complementares:
-- **S1 – Unicast Multidomínio**: valida a aderência semântica da intenção sob tráfego concorrente;
-- **S2 – Multicast Orientado à Origem**: avalia estabilidade, recuperação e contenção sob eventos dinâmicos de *join multicast*.
+- **S1 – *Unicast* Multidomínio**: valida a aderência semântica da intenção sob tráfego concorrente;
+- **S2 – *Multicast* Orientado à Origem**: avalia estabilidade, recuperação e contenção sob eventos dinâmicos de *join multicast*.
 
-Os resultados completos estão disponíveis em:
+Os resultados completos utilizados no artigo estão disponíveis em:
 - [`/results/S1/`](/results/S1/)
 - [`/results/S2/`](/results/S2/)
 
@@ -100,7 +105,7 @@ Disponibilizamos também diversos outros resultados. Eles estão disponíveis em
 
 As Figuras utilizadas no artigo encontram-se em [`/figures/`](/figures/). Os *scripts* e artefatos utilizados para a construção das Figuras estão em [`figures/construction/`](figures/construction/).
 
-📄 **Há um passo a passo completo para realização dos experimentos** em [`docs/experiments.md`](docs/experiments.md).
+📄 **Há um passo a passo completo para realização dos experimentos** em [`/docs/experiments.md`](docs/experiments.md).
 
 ---
 
@@ -119,7 +124,7 @@ As Figuras utilizadas no artigo encontram-se em [`/figures/`](/figures/). Os *sc
 │   ├── schemas/            # JSON Schemas da linguagem
 │   ├── scripts/            # Execução, comparação e plots
 │   ├── specs/            
-│   │   ├──  invalid/       # Especificações inválidas (teste L2i)
+│   │   ├── invalid/        # Especificações inválidas (teste L2i)
 │   │   └── valid/          # Especificações válidas (utilizadas)
 │   └── tools/              # Compatilidade de specs
 ├── figures/                # Figuras utilizadas no artigo
@@ -138,17 +143,17 @@ As Figuras utilizadas no artigo encontram-se em [`/figures/`](/figures/). Os *sc
 
 ## 📌 Observações importantes
 
-- Este repositório **não contém** a implementação completa da linguagem L2i nem dos backends.
-- A versão completa dos artefatos com todos os códigos poderá ser disponibilizada **após a avaliação** ou **mediante solicitação aos autores**.
+- Este repositório **não contém** a implementação completa da linguagem L2i nem dos seus *backends*.
+- A versão completa dos artefatos com todos os códigos, 100% reprodutíveis, poderá ser disponibilizada **após a avaliação** ou **mediante solicitação aos autores**.
 
 ---
 
 ## 🔗 Próximos passos
 
 Consulte:
-- 📐 [`docs/architecture.md`](docs/architecture.md) para a visão arquitetural
-- 🧪 [`docs/experiments.md`](docs/experiments.md) para reproduzir conceitualmente os cenários
-- 👩‍💻 [`docs/devs.md`](docs/devs.md) para notas técnicas adicionais
+- 📐 [`/docs/architecture.md`](/docs/architecture.md) para a visão arquitetural
+- 🧪 [`/docs/experiments.md`](/docs/experiments.md) para reproduzir conceitualmente os cenários
+- 👩‍💻 [`/docs/devs.md`](/docs/devs.md) para notas técnicas adicionais
 
 ---
 

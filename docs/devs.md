@@ -1,8 +1,6 @@
-## Guia de Desenvolvimento, Execução e Reprodutibilidade do Framework L2i
+# 👩‍💻 Guia de Desenvolvimento, Execução e Reprodutibilidade do Framework L2i
 
-👩‍💻 **Informações Técnicas Complementares**
-
-Este documento reúne observações úteis para revisores e desenvolvedores interessados na proposta.
+🏠 [README](../README.md) · 📐 [Arquitetura](architecture.md) · 🧪 [Experimentos](experiments.md) · 📃 [Resultados no artigo](/results/) · 📊 [Figuras no artigo](/figures/) · 📋 [Mais resultados](/misc/results/) · 📈 [Mais figuras](/misc/plots/)
 
 ---
 
@@ -50,8 +48,7 @@ Nesta versão pública:
 
 - A implementação completa da linguagem L2i não está disponível.
 
-📩 O acesso pode ser concedido **após a avaliação** ou **mediante solicitação aos seus autores**.
-
+📩 O acesso poderá ser concedido **após a avaliação** ou **mediante solicitação aos seus autores**.
 
 ---
 

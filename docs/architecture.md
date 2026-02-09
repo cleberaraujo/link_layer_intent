@@ -1,31 +1,37 @@
-# Arquitetura — Framework de Adaptação Dinâmica em L2 (CED/L2i)
-  
-## 1. Visão geral da arquitetura
+# 🏗️ Arquitetura — Framework de Adaptação Dinâmica em L2 (CED/L2i)
 
-O *framework* implementa uma **camada de adaptação declarativa e orientada a intenções para a camada de enlace (L2)**, projetada para operar em ambientes heterogêneos e multidomínio. Seu objetivo principal é desacoplar **os requisitos de comunicação expressos pelas camadas superiores** dos **mecanismos específicos de tecnologia** utilizados para aplicá-los em L2.
+🏠 [README](../README.md) · 🧪 [Experimentos](/docs/experiments.md) · 👩‍💻 [Notas Técnicas](/docs/devs.md) · 📃 [Resultados no artigo](/results/) · 📊 [Figuras no artigo](/figures/) · 📋 [Mais resultados](/misc/results/) · 📈 [Mais figuras](/misc/plots/)
 
-O elemento central é a linguagem **L2i (Layer‑2 Intent)**, utilizada para declarar *intenções de comunicação* sem impor como essas intenções devem ser implementadas.
+---
+
+## 🧭 1. Visão geral da arquitetura
+
+O framework implementa uma **camada de adaptação declarativa e orientada a intenções para a camada de enlace (L2)**, projetada para operar em ambientes heterogêneos e multidomínio. Seu objetivo principal é desacoplar **os requisitos de comunicação expressos pelas camadas superiores** dos **mecanismos específicos de tecnologia** utilizados para aplicá-los em L2.
+
+O elemento central é a linguagem **L2i (Layer-2 Intent)**, utilizada para declarar *intenções de comunicação* sem impor como essas intenções devem ser implementadas.
 
 Em alto nível, a arquitetura é organizada em torno de três preocupações ortogonais:
 
-1. **Especificação** — o que a comunicação requer;
-2. **Adaptação** — como esses requisitos são mapeados para as capacidades disponíveis;
-3. **Execução** — como configurações concretas são aplicadas em cada domínio.
+1. **Especificação** — o que a comunicação requer  
+2. **Adaptação** — como esses requisitos são mapeados para as capacidades disponíveis  
+3. **Execução** — como configurações concretas são aplicadas em cada domínio  
 
 Essa separação permite:
 
-- portabilidade entre tecnologias de L2,
-- evolução incremental do plano de dados,
-- coexistência entre infraestruturas legadas e programáveis.
+- portabilidade entre tecnologias de L2  
+- evolução incremental do plano de dados  
+- coexistência entre infraestruturas legadas e programáveis  
 
 A arquitetura evita explicitamente expor detalhes de configuração de baixo nível (por exemplo, comandos `tc`, RPCs NETCONF ou tabelas P4) para aplicações ou protocolos.
 
 
 ---
 
-## 2. Arquitetura em camadas
+## 🧱 2. Arquitetura em camadas
 
-Conceitualmente, o *framework* está posicionado **entre L2 e L3**, atuando como um estrato de adaptação que estende as funcionalidades tradicionais da camada de enlace sem modificar as pilhas de protocolos existentes.
+Conceitualmente, o framework está posicionado **entre L2 e L3**, atuando como um estrato de adaptação que estende as funcionalidades tradicionais da camada de enlace sem modificar as pilhas de protocolos existentes.
+
+Essa posição permite ao L2i impor QoS, priorização e comportamento multicast, reagir dinamicamente a mudanças de tráfego ou topologia e permanecer transparente às camadas superiores.
 
 ```
 +-------------------------------+
@@ -59,12 +65,12 @@ Essa posição permite ao L2i:
 
 ---
 
-## 3. Componentes arquiteturais principais
+## 🧩 3. Componentes arquiteturais principais
 
 A arquitetura é decomposta em três componentes centrais:
 
-1. **CED — Camada de Especificações Declarativas**
-2. **MAD — Mecanismo de Adaptação Dinâmica**
+1. **CED — Camada de Especificações Declarativas**  
+2. **MAD — Mecanismo de Adaptação Dinâmica**  
 3. **AC — Aplicador de Configurações**
 
 O L2i é a **materialização concreta da CED**, enquanto MAD e AC fornecem o pipeline de adaptação e execução em tempo de execução.
@@ -115,11 +121,11 @@ Exemplos:
 
 - Domínio Linux: modelagem de tráfego, filas e prioridades.
 - Domínio NETCONF: modelos abstratos de QoS.
-- Domínio P4: pipelines match-action e grupos multicast.
+- Domínio P4: *pipelines match-action* e grupos *multicast*.
 
 As capacidades são descritas por meio de:
 
-- [`/dsl/profiles/`](/dsl/profiles/*.json)
+- [`/dsl/profiles/*.json`](/dsl/profiles/)
 
 Isso permite ao *framework* "raciocinar" sobre **o que é viável** em cada domínio.
 
@@ -144,7 +150,7 @@ O MAD é responsável pela **tomada de decisão em tempo de execução**.
 Suas responsabilidades incluem:
 
 - traduzir intenções validadas em planos de execução,
-- selecionar backends de execução (mock ou real),
+- selecionar *backends* de execução (*mock* ou real),
 - lidar com falhas transitórias e tentativas de reaplicação,
 - suportar operação em malha fechada.
 
@@ -203,7 +209,7 @@ Isso viabiliza experimentação além do *IGMP snooping* tradicional, incluindo:
 
 ---
 
-## 9. Arquitetura Baseline vs. Adaptada
+## 🆚 9. Arquitetura Baseline vs. Adaptada
 
 A arquitetura oferece suporte explícito a experimentação comparativa:
 
@@ -219,7 +225,7 @@ Essa dualidade é fundamental para validação científica e reprodutibilidade.
 
 ---
 
-## 10. Garantias arquiteturais
+## ⚓ 10. Garantias arquiteturais
 
 A arquitetura garante:
 
@@ -231,7 +237,7 @@ A arquitetura garante:
 
 ---
 
-## 11. Escopo e limitações arquiteturais
+## 🎏 11. Escopo e limitações arquiteturais
 
 Escopo atual:
 
@@ -249,8 +255,12 @@ Esses limites preservam a clareza e o foco arquitetural.
 
 ---
 
-## 12. Síntese
+## 📔 12. Síntese
 
 A arquitetura da proposta estabelece um **novo limite de abstração para a camada de enlace**, permitindo adaptação orientada a intenções sem sacrificar desempenho ou implantabilidade.
 
 Ao fundamentar especificações declarativas em backends reais de execução, o framework reduz a lacuna entre **programabilidade de redes** e **operação prática em ambientes multidomínio**, posicionando o L2i como um bloco fundamental para futuras arquiteturas de L2.
+
+---
+
+📌 *Estas descrições visam apoiar a leitura crítica do artigo e a avaliação dos resultados apresentados.*
