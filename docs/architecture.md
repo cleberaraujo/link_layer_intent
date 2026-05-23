@@ -264,3 +264,18 @@ Ao fundamentar especificações declarativas em backends reais de execução, o 
 ---
 
 📌 *Estas descrições visam apoiar a leitura crítica do artigo e a avaliação dos resultados apresentados.*
+
+---
+
+## 🔗 Implementação completa
+
+A implementação integral da arquitetura proposta, incluindo os componentes executáveis do framework L2i e os artefatos reproduzíveis avaliados pelo CTA do SBRC, encontra-se no repositório:
+
+🔗 : https://github.com/cleberaraujo/l2i-dsl
+
+O repositório recebeu os selos de avaliação do CTA:
+
+* ✅ **SeloD** — ArtefatoDisponível
+* ✅ **SeloF** — Artefato Funcional
+* ✅ **SeloS** — Artefato Sustentável
+* ✅ **SeloR** — Artefato Reprodutível (**objetivo principal**)

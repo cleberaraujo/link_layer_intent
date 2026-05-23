@@ -42,13 +42,34 @@ Esses artefatos são suficientes para:
 
 ---
 
-## 🔒 Código completo não incluído
+## 🔗 Implementação completa e reprodutibilidade
 
-Nesta versão pública:
+Este repositório concentra os artefatos necessários para compreensão da proposta e análise dos resultados apresentados no artigo.
 
-- A implementação completa da linguagem L2i não está disponível.
+A implementação completa do framework L2i — incluindo:
 
-📩 O acesso poderá ser concedido **após a avaliação** ou **mediante solicitação aos seus autores**.
+- código-fonte integral,
+- backends de execução,
+- automação experimental,
+- ambiente reproduzível,
+- instruções completas de execução,
+
+foi disponibilizada separadamente em um repositório dedicado à avaliação do Comitê Técnico de Artefatos (CTA) do SBRC.
+
+---
+
+### 🏅 Repositório avaliado pelo CTA
+
+🔗: https://github.com/cleberaraujo/l2i-dsl
+
+O repositório recebeu os selos de avaliação do CTA:
+
+* ✅ **SeloD** — ArtefatoDisponível
+* ✅ **SeloF** — Artefato Funcional
+* ✅ **SeloS** — Artefato Sustentável
+* ✅ **SeloR** — Artefato Reprodutível (**objetivo principal**)
+
+Esse repositório contém a versão integral dos artefatos científicos da proposta, preparada especificamente para reprodução experimental e validação independente.
 
 ---
 

@@ -10,6 +10,21 @@ O objetivo é garantir **transparência experimental total e reprodutibilidade**
 
 ---
 
+## 🏅 Reprodutibilidade completa (CTA)
+
+A implementação completa dos experimentos, incluindo automação integral, código-fonte do framework, ambientes reproduzíveis e artefatos utilizados na avaliação do CTA do SBRC, está disponível em:
+
+🔗 : https://github.com/cleberaraujo/l2i-dsl
+
+O repositório recebeu os selos de avaliação do CTA:
+
+* ✅ **SeloD** — ArtefatoDisponível
+* ✅ **SeloF** — Artefato Funcional
+* ✅ **SeloS** — Artefato Sustentável
+* ✅ **SeloR** — Artefato Reprodutível (**objetivo principal**)
+
+---
+
 ## 🔬 1. Dimensões experimentais
 
 A avaliação da proposta é estruturada ao longo de **dois eixos experimentais ortogonais**.

@@ -143,8 +143,40 @@ As Figuras utilizadas no artigo encontram-se em [`/figures/`](/figures/). Os *sc
 
 ## 📌 Observações importantes
 
-- Este repositório **não contém** a implementação completa da linguagem L2i nem dos seus *backends*.
-- A versão completa dos artefatos com todos os códigos, 100% reprodutíveis, poderá ser disponibilizada **após a avaliação** ou **mediante solicitação aos autores**.
+Este repositório acompanha o artigo submetido ao SBRC e concentra:
+
+- documentação arquitetural,
+- descrição metodológica,
+- artefatos experimentais,
+- resultados utilizados no artigo,
+- figuras e materiais auxiliares.
+
+⚠️ A implementação completa do framework L2i, incluindo:
+
+- código-fonte integral,
+- scripts automatizados,
+- ambiente reproduzível,
+- instruções completas de execução,
+- artefatos de reprodutibilidade,
+
+foi organizada em um repositório independente voltado especificamente à avaliação do Comitê Técnico de Artefatos (CTA).
+
+---
+
+## 🏅 Repositório oficial de reprodutibilidade (CTA)
+
+🔗 Repositório completo avaliado pelo CTA:
+
+https://github.com/cleberaraujo/l2i-dsl
+
+O repositório recebeu os selos de avaliação do CTA:
+
+* ✅ **SeloD** — ArtefatoDisponível
+* ✅ **SeloF** — Artefato Funcional
+* ✅ **SeloS** — Artefato Sustentável
+* ✅ **SeloR** — Artefato Reprodutível (**objetivo principal**)
+
+Esse repositório contém a versão integral dos artefatos científicos da proposta, preparada especificamente para reprodução experimental e validação independente.
 
 ---
 
@@ -157,4 +189,4 @@ Consulte:
 
 ---
 
-📄 *Este repositório acompanha o artigo submetido ao SBRC e destina-se exclusivamente a fins de avaliação científica.*
+📄 *Este repositório acompanha o artigo submetido ao SBRC e destina-se exclusivamente a fins de avaliação científica. A versão completa está no repositório l2-dsl.*
